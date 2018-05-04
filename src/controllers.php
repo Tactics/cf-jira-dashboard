@@ -16,7 +16,7 @@ $app->get('/', function () use ($app) {
 
 $app->get('/stijn', function () use ($app) {
     return $app['twig']->render('index.html.twig', array(
-        'sprints' => $app['api_caller_service_provider']->getClearfactsSprint()
+        'sprint' => $app['api_caller_service_provider']->getClearfactsSprint()
     ));
 
 });

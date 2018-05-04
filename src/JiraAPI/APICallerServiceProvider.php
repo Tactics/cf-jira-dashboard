@@ -39,12 +39,31 @@ class APICallerServiceProvider
          */
 
         $client = new Client();
-        $response = $client->get('http://jira.tactics.be:8080/rest/agile/latest/board/1/sprint', [
+        $latestSprint = $client->get('http://jira.tactics.be:8080/rest/agile/latest/board/1/sprint?state=active', [
             'auth' => [
                 $this->username, $this->password
                             ]
         ]);
+        $latestSprint = json_decode($latestSprint->getBody()->getContents(), true);
+        $latestSprint = $latestSprint['values'][0];
+        $sprintname = $latestSprint['name'];
+        $goal = $latestSprint['goal'];
+        $sprintId = $latestSprint['id'];
 
-        return json_decode($response->getBody()->getContents(), true);
+        $issues = $latestSprint = $client->get('http://jira.tactics.be:8080/rest/agile/1.0/board/1/sprint/' . $sprintId .'/issue', [
+            'auth' => [
+                $this->username, $this->password
+            ]
+        ]);
+
+        $issues = json_decode($issues->getBody()->getContents(), true);
+        $sprint = [
+            'sprintname' => $sprintname,
+            'goal' => $goal,
+            'sprintId' => $sprintId,
+            'issues' => $issues
+        ];
+
+        return $sprint;
     }
 }
