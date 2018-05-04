@@ -44,6 +44,7 @@ class APICallerServiceProvider
                 $this->username, $this->password
                             ]
         ]);
-        return json_decode($response->getBody()->getContents(),true);
+
+        return json_decode($response->getBody()->getContents(), true);
     }
 }
