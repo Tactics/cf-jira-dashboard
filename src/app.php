@@ -7,6 +7,8 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
 
+$config = require __DIR__ . '/../secrets/secrets.php';
+
 $app = new Application();
 $app->register(new ServiceControllerServiceProvider());
 $app->register(new AssetServiceProvider());
@@ -18,8 +20,8 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
     return $twig;
 });
 
-$app["api_caller_service_provider"] = function() use ($app) {
-    return new APICallerServiceProvider();
+$app["api_caller_service_provider"] = function() use ($app, $config) {
+    return new APICallerServiceProvider($config['username'], $config['password']);
 };
 
 return $app;

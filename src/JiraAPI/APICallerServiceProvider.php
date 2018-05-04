@@ -19,7 +19,15 @@ class APICallerServiceProvider
 
     $response = new SimpleXMLElement($response);*/
 
+    private $username;
+    private $password;
 
+    public function __construct($username, $password)
+    {
+
+        $this->username = $username;
+        $this->password = $password;
+    }
 
     public function getClearfactsSprint()
     {
@@ -33,8 +41,8 @@ class APICallerServiceProvider
         $client = new Client();
         $response = $client->get('http://jira.tactics.be:8080/rest/agile/latest/board/1', [
             'auth' => [
-                '', ''
-            ]
+                $this->username, $this->password
+                            ]
         ]);
 
         die(var_dump($response));
