@@ -39,12 +39,11 @@ class APICallerServiceProvider
          */
 
         $client = new Client();
-        $response = $client->get('http://jira.tactics.be:8080/rest/agile/latest/board/1', [
+        $response = $client->get('http://jira.tactics.be:8080/rest/agile/latest/board/1/sprint', [
             'auth' => [
                 $this->username, $this->password
                             ]
         ]);
-
-        die(var_dump($response));
+        return json_decode($response->getBody()->getContents(),true);
     }
 }

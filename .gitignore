@@ -1,3 +1,7 @@
 /vendor/
 secrets/*
-.idea/*
+
+
+.idea/
+.env/
+
