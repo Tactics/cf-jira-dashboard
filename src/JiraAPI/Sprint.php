@@ -88,5 +88,13 @@ class Sprint
         $this->issues = $issues;
     }
 
+    /**
+     * @param array $issue
+     */
+    public function getIssueById($id)
+    {
+        return $this->issues['issues']['issues'][$id];
+    }
+
 
 }

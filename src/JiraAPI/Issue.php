@@ -3,7 +3,7 @@
 namespace JiraAPI;
 
 
-class Ticket extends Sprint
+class Issue extends Sprint
 {
     private $title;
     private $shortInfo;
