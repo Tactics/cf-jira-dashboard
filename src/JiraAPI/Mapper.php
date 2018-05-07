@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: deridstijn
- * Date: 5/7/18
- * Time: 1:04 PM
- */
 
 namespace JiraAPI;
 use JiraAPI\Sprint;
@@ -24,9 +18,9 @@ class Mapper
     {
         $name = $this->sprintArray['sprintname'];
         $goal = $this->sprintArray['goal'];
-        $id = $this->sprintArray['id'];
+        $id = $this->sprintArray['sprintId'];
 
-        $this->sprint = new Sprint($name, $id, $goal);
+        $this->sprint = new Sprint($id, $name, $goal);
     }
 
     public function makeNewIssues()
@@ -43,8 +37,26 @@ class Mapper
             array_push($this->issues, new Issue($id, $key, $link, $status, $shortInfo, $assignee));
         }
     }
-    public function getSprintInfo()
+
+    public function getIssueKey($id)
     {
-        $this->sprint->getSprintInfo();
+        var_dump($this->issues[][$id]) ;
     }
+
+    public function getSprintName(): string
+    {
+        return $this->sprint->getName();
+    }
+
+    public function getSprintGoal(): string
+    {
+        return $this->sprint->getGoal();
+    }
+
+    public function getSprintId(): int
+    {
+        return $this->sprint->getId();
+    }
+
+
 }

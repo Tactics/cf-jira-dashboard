@@ -13,7 +13,7 @@ class MapperTest extends \PHPUnit\Framework\TestCase
             'goal' => 'the moon',
             'sprintId' => 485,
             'issues' => [
-                'issues' => [''
+                'issues'
                    => [
                        [
                            'key' => 'Testissue-255',
@@ -24,14 +24,14 @@ class MapperTest extends \PHPUnit\Framework\TestCase
                                        'name' => 'Waiting for validation'
                                    ]
                                ],
-                               [
+
                                    'summary' => 'een heel cool test issue'
-                               ],
-                               [
+                               ,
+
                                    'assignee' => [
                                        'name' => 'Joske'
                                    ]
-                               ]
+
                            ]
                        ],
                         [
@@ -43,20 +43,19 @@ class MapperTest extends \PHPUnit\Framework\TestCase
                                        'name' => 'To Do'
                                    ]
                                ],
-                               [
+
                                    'summary' => 'een iets minder cool test issue'
-                               ],
-                               [
+                               ,
+
                                    'assignee' => [
                                        'name' => 'Jefke'
-                                   ]
+
                                ]
                             ]
                         ]
 
                     ]
                 ]
-            ]
         ];
 
         $this->mapper = new Mapper($this->sprintArray);
@@ -69,11 +68,13 @@ class MapperTest extends \PHPUnit\Framework\TestCase
     public function mapper_can_make_a_new_sprint_from_the_sprint_array()
     {
         $this->mapper->makeNewSprint();
-        $result = $this->mapper->getSprintInfo();
+        $sprintNameResult = $this->mapper->getSprintName();
+        $sprintGoalResult = $this->mapper->getSprintGoal();
+        $sprintIdResult = $this->mapper->getSprintId();
 
-        $this->assertEquals('SPRINT 16-4', $result['sprintname']);
-        $this->assertEquals('the moon', $result['goal']);
-        $this->assertEquals('485', $result['id']);
+        $this->assertEquals('SPRINT 16-4', $sprintNameResult);
+        $this->assertEquals('the moon', $sprintGoalResult);
+        $this->assertEquals('485', $sprintIdResult);
 
     }
 
@@ -83,7 +84,7 @@ class MapperTest extends \PHPUnit\Framework\TestCase
     public function mapper_can_make_multiple_issues_from_the_sprint_array()
     {
         $this->mapper->makeNewIssues();
-        $issue1 = $this->mapper->getIssueById(30);
+        $issue1 = $this->mapper->getIssueKey(30);
         $issue2 = $this->mapper->getIssueById(40);
 
         $this->assertEquals(30, $issue1['id']);
