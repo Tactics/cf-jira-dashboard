@@ -15,8 +15,14 @@ $app->get('/', function () use ($app) {
 ;
 
 $app->get('/stijn', function () use ($app) {
+    $zottenArray = $app['api_caller_service']->getClearfactsSprint();
+
+    $zottenGefilterdeArray = $app["issue_service_provider"]->filterSprintIssues($zottenArray);
+
+    return new JsonResponse($zottenGefilterdeArray);
+
     return $app['twig']->render('index.html.twig', array(
-        'sprint' => $app['api_caller_service_provider']->getClearfactsSprint()
+        'sprint' => $app['api_caller_service']->getClearfactsSprint()
     ));
 
 });

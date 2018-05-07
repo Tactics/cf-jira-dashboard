@@ -7,11 +7,8 @@
     <h1>{{ sprint['sprintname'] }} id: {{  sprint['sprintId']  }}</h1>
     <h2>{{ sprint['goal'] }}</h2>
 
-    {{ dump(sprint['issues']) }}
-    {% for issue in sprint['issues'] %}
-        {{  dump(issue) }}
-        <br>
-        <br>
-        {{ issue }}
+    {{ dump(sprint['issues']['issues']) }}
+    {% for issue in sprint['issues']['issues'] %}
+        {{ issue['self'] }}
     {% endfor %}
 {% endblock %}

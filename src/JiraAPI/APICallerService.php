@@ -7,7 +7,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use GuzzleHttp\Client;
 
-class APICallerServiceProvider
+class APICallerService
 {
     /*If you have a url and your php supports it, you could just call file_get_contents:
 
@@ -50,9 +50,10 @@ class APICallerServiceProvider
         $goal = $latestSprint['goal'];
         $sprintId = $latestSprint['id'];
 
-        $issues = $latestSprint = $client->get('http://jira.tactics.be:8080/rest/agile/1.0/board/1/sprint/' . $sprintId .'/issue', [
+        $issues = $client->get('http://jira.tactics.be:8080/rest/agile/1.0/board/1/sprint/' . $sprintId .'/issue', [
             'auth' => [
                 $this->username, $this->password
+                //200 issues per request
             ]
         ]);
 
