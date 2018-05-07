@@ -9,7 +9,7 @@ class MapperTest extends \PHPUnit\Framework\TestCase
     public function setUp()
     {
         $this->sprintArray = [
-            'sprintName' => 'SPRINT 16-4',
+            'sprintname' => 'SPRINT 16-4',
             'goal' => 'the moon',
             'sprintId' => 485,
             'issues' => [
@@ -71,7 +71,7 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $this->mapper->makeNewSprint();
         $result = $this->mapper->getSprintInfo();
 
-        $this->assertEquals('SPRINT 16-4', $result['sprintName']);
+        $this->assertEquals('SPRINT 16-4', $result['sprintname']);
         $this->assertEquals('the moon', $result['goal']);
         $this->assertEquals('485', $result['id']);
 
@@ -99,5 +99,5 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Jefke', $issue2['assignee']);
 
     }
-    
+
 }
