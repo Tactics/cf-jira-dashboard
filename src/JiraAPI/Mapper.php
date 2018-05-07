@@ -8,7 +8,7 @@ class Mapper
 {
     private $sprintArray = [];
     private $sprint;
-    private $issues;
+    private $issues = [];
     public function __construct($sprintArray)
     {
         $this->sprintArray = $sprintArray;

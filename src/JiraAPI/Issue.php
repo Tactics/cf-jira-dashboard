@@ -2,44 +2,36 @@
 
 namespace JiraAPI;
 
-
-class Issue extends Sprint
+class Issue
 {
-    private $title;
+    private $id;
+    private $key;
     private $shortInfo;
     private $status;
     private $link;
     private $assignee;
 
-    public function __construct(string $name, string $goal, int $id, array $issues, string $title, string $shortInfo, string $status,
-                                string $link, string $assignee)
+    public function __construct($id, $key, $link, $status, $shortInfo, $assignee)
     {
-        parent::__construct($name, $goal, $id, $issues);
-        $this->title = $title;
+        $this->id = $id;
+        $this->key = $key;
         $this->shortInfo = $shortInfo;
         $this->status = $status;
         $this->link = $link;
-        $this->assignee;
+        $this->assignee = $assignee;
     }
 
+
     /**
-     * @return string
+     * @return mixed
      */
-    public function getTitle()
+    public function getKey()
     {
-        return $this->title;
+        return $this->key;
     }
 
     /**
-     * @param string $title
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function getShortInfo()
     {
@@ -47,15 +39,7 @@ class Issue extends Sprint
     }
 
     /**
-     * @param string $shortInfo
-     */
-    public function setShortInfo($shortInfo)
-    {
-        $this->shortInfo = $shortInfo;
-    }
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function getStatus()
     {
@@ -63,27 +47,11 @@ class Issue extends Sprint
     }
 
     /**
-     * @param string $status
-     */
-    public function setStatus($status)
-    {
-        $this->status = $status;
-    }
-
-    /**
-     * @return string
+     * @return mixed
      */
     public function getLink()
     {
         return $this->link;
-    }
-
-    /**
-     * @param string $link
-     */
-    public function setLink($link)
-    {
-        $this->link = $link;
     }
 
     /**
@@ -94,12 +62,6 @@ class Issue extends Sprint
         return $this->assignee;
     }
 
-    /**
-     * @param mixed $assignee
-     */
-    public function setAssignee($assignee)
-    {
-        $this->assignee = $assignee;
-    }
+
 
 }
