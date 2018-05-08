@@ -18,6 +18,7 @@ $app->get('/stijn', function () use ($app) {
     $result = $app['api_caller_service']->getClearfactsSprint();
 
     $mapper = new Mapper($result);
+
     $sprint = $mapper->getSprint();
 
     $todos = $mapper->getToDoIssues();

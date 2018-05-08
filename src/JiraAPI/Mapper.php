@@ -30,11 +30,13 @@ class Mapper
             $id = $issue['id'];
             $key = $issue['key'];
             $link = 'http://jira.tactics.be:8080/browse/' . $key;
-            $status = $issue['fields']['status']['statusCategory']['name'];
             $shortInfo = $issue['fields']['summary'];
             $assignee = $issue['fields']['assignee']['name'];
+            $status = $issue['fields']['status']['statusCategory']['name'];
+            $statkey = $issue['fields']['status']['statusCategory']['key'];
+            $statid = $issue['fields']['status']['id'];
 
-            array_push($this->issues, new Issue($id, $key, $link, $status, $shortInfo, $assignee));
+            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $statid));
         }
     }
 
