@@ -2,6 +2,12 @@
 declare(strict_types=1);
 
 namespace JiraAPI;
+define(OPEN, 'open');
+define(IN_PROGRESS,'In Progress');
+define(TO_REVIEW, 'To Review');
+define(RESOLVED, 'Resolved');
+define(REOPENED, 'Reopened');
+define(CLOSED, 'Closed');
 
 class Mapper
 {
@@ -34,9 +40,9 @@ class Mapper
             $assignee = $issue['fields']['assignee']['name'];
             $status = $issue['fields']['status']['statusCategory']['name'];
             $statkey = $issue['fields']['status']['statusCategory']['key'];
-            $statid = $issue['fields']['status']['id'];
+            $stateName = $issue['fields']['status']['name'];
 
-            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $statid));
+            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $stateName));
         }
     }
 
@@ -51,35 +57,35 @@ class Mapper
         return $this->sprint;
     }
 
-    public function getToDoIssues(): ?array
+    public function getOpenIssues(): ?array
     {
-        $toDos = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'To Do'); });
-        return $toDos;
+        $openIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === OPEN) || ($var->getStateName() === REOPENED); });
+        return $openIssues;
     }
 
-    public function getInProgress(): ?array
+    public function getInProgressIssues(): ?array
     {
-        $inProgress = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Progress'); });
-        return $inProgress;
+        $inProgressIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === IN_PROGRESS); });
+        return $inProgressIssues;
     }
 
-    public function getDone(): ?array
+    public function getToReviewIssues(): ?array
     {
-        $done = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Done'); });
-        return $done;
+        $toReviewIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === TO_REVIEW); });
+        return $toReviewIssues;
+    }
+    public function getDoneIssues(): ?array
+    {
+        $doneIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === RESOLVED); });
+        return $doneIssues;
     }
 
-    public function getWaitingForValidation(): ?array
+    public function getClosedIssues(): ?array
     {
-        $waitingForValidation = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Waiting For Validation'); });
-        return $waitingForValidation;
+        $closedIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === CLOSED); });
+        return $closedIssues;
     }
 
-    public function getInProduction(): ?array
-    {
-        $inProduction = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Production'); });
-        return $inProduction;
-    }
     /**
      * @return array
      */
