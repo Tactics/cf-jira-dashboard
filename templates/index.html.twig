@@ -2,13 +2,185 @@
 
 {% block content %}
 
+    <h1>{{ sprint.name }} id: {{  sprint.id  }}</h1>
+    <h2>{{ sprint.goal }}</h2>
 
-    Welcome to your new Silex Application!
-    <h1>{{ sprint['sprintname'] }} id: {{  sprint['sprintId']  }}</h1>
-    <h2>{{ sprint['goal'] }}</h2>
+    <div class="row">
+        <div class="col-md-1">
+            <!--zotte extra buttons-->
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <h3>ToDo</h3>
+            </div>
+            {% for todo in todos %}
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ todo.id }}
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{{ todo.link }}">{{ todo.key }}</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        {% if todo.assignee %}
+                            {{ todo.assignee }}
+                        {% else %}
+                            no assignee
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        {{ todo.status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row-md-12">
+                        {{ todo.shortInfo }}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
 
-    {{ dump(sprint['issues']['issues']) }}
-    {% for issue in sprint['issues']['issues'] %}
-        {{ issue['self'] }}
-    {% endfor %}
+
+        <div class="col-md-2">
+            <div class="row">
+                <h3>In Progress</h3>
+            </div>
+            {% for inProg in inProgress %}
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ inProg.id }}
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{{ inProg.link }}">{{ inProg.key }}</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        {% if inProg.assignee %}
+                            {{ inProg.assignee }}
+                        {% else %}
+                            no assignee
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        {{ inProg.status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row-md-12">
+                        {{ inProg.shortInfo }}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+                <h3>Waiting for validation</h3>
+            </div>
+            {% for waitingForValidation in waitingForValidations %}
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ waitingForValidation.id }}
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{{ waitingForValidation.link }}">{{ waitingForValidation.key }}</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        {% if waitingForValidation.assignee %}
+                            {{ waitingForValidation.assignee }}
+                        {% else %}
+                            no assignee
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        {{ waitingForValidation.status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row-md-12">
+                        {{ waitingForValidation.shortInfo }}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-2">
+            <div class="row">
+                <h3>Done</h3>
+            </div>
+            {% for done in dones %}
+                <div class="row">
+                    <div class="col-md-3">
+                        {{ done.id }}
+                    </div>
+                    <div class="col-md-9">
+                        <a href="{{ done.link }}">{{ done.key }}</a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        {% if done.assignee %}
+                            {{ done.assignee }}
+                        {% else %}
+                            no assignee
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        {{ done.status }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="row-md-12">
+                        {{ done.shortInfo }}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </div>
+
+        <div class="col-md-2">
+        <div class="row">
+            <h3>In production</h3>
+        </div>
+        {% for inProduction in inProductions %}
+            <div class="row">
+                <div class="col-md-3">
+                    {{ inProduction.id }}
+                </div>
+                <div class="col-md-9">
+                    <a href="{{ inProduction.link }}">{{ inProduction.key }}</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    {% if inProduction.assignee %}
+                        {{ inProduction.assignee }}
+                    {% else %}
+                        no assignee
+                    {% endif %}
+                </div>
+                <div class="col-md-7">
+                    {{ inProduction.status }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="row-md-12">
+                    {{ inProduction.shortInfo }}
+                </div>
+            </div>
+            <br>
+        {% endfor %}
+    </div>
+    </div>
+
+
+
 {% endblock %}
