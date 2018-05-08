@@ -5,7 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use JiraAPI\Mapper;
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->get('/', function () use ($app) {
@@ -15,14 +15,17 @@ $app->get('/', function () use ($app) {
 ;
 
 $app->get('/stijn', function () use ($app) {
-    $zottenArray = $app['api_caller_service']->getClearfactsSprint();
+    $result = $app['api_caller_service']->getClearfactsSprint();
 
-    $zottenGefilterdeArray = $app["issue_service_provider"]->filterSprintIssues($zottenArray);
-
-    return new JsonResponse($zottenGefilterdeArray);
-
+    $mapper = new Mapper($result);
+    $sprint = $mapper->getSprint();
+    $issues = $mapper->getIssues();
+    //$todos = $mapper->getToDoIssues();
+    phpinfo();
+    exit();
     return $app['twig']->render('index.html.twig', array(
-        'sprint' => $app['api_caller_service']->getClearfactsSprint()
+        'sprint' => $sprint,
+        'issues' => $issues
     ));
 
 });

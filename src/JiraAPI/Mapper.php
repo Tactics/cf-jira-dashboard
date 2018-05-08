@@ -1,8 +1,7 @@
 <?php
+declare(strict_types=1);
 
 namespace JiraAPI;
-use JiraAPI\Sprint;
-use JiraAPI\Issue;
 
 class Mapper
 {
@@ -12,18 +11,19 @@ class Mapper
     public function __construct($sprintArray)
     {
         $this->sprintArray = $sprintArray;
+        $this->makeNewSprint();
+        $this->makeNewIssues();
     }
 
-    public function makeNewSprint()
+    private function makeNewSprint()
     {
         $name = $this->sprintArray['sprintname'];
         $goal = $this->sprintArray['goal'];
         $id = $this->sprintArray['sprintId'];
-
         $this->sprint = new Sprint($id, $name, $goal);
     }
 
-    public function makeNewIssues()
+    private function makeNewIssues()
     {
         foreach($this->sprintArray['issues']['issues'] as $issue)
         {
@@ -38,25 +38,52 @@ class Mapper
         }
     }
 
-    public function getIssueKey($id)
+    public function getIssueById($id): Issue
     {
-        var_dump($this->issues[][$id]) ;
+        $filtered = array_filter($this->issues, function(Issue $var) use ($id) { return ($var->getId() === $id); } );
+        return reset($filtered);
     }
 
-    public function getSprintName(): string
+    public function getSprint(): Sprint
     {
-        return $this->sprint->getName();
+        return $this->sprint;
     }
 
-    public function getSprintGoal(): string
+    public function getToDoIssues(): ?Issue
     {
-        return $this->sprint->getGoal();
+        $toDos = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'To Do'); });
+        return $toDos;
     }
 
-    public function getSprintId(): int
+    public function getInProgress(): ?Issue
     {
-        return $this->sprint->getId();
+        $inProgress = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Progress'); });
+        return $inProgress;
     }
 
+    public function getDone(): ?Issue
+    {
+        $done = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Done'); });
+        return $done;
+    }
+
+    public function getWaitingForValidation(): ?Issue
+    {
+        $waitingForValidation = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Waiting For Validation'); });
+        return $waitingForValidation;
+    }
+
+    public function inProduction(): ?Issue
+    {
+        $inProduction = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Production'); });
+        return $inProduction;
+    }
+    /**
+     * @return array
+     */
+    public function getIssues(): array
+    {
+        return $this->issues;
+    }
 
 }

@@ -21,6 +21,13 @@ class Issue
         $this->assignee = $assignee;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * @return mixed
@@ -61,7 +68,5 @@ class Issue
     {
         return $this->assignee;
     }
-
-
 
 }
