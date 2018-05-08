@@ -50,14 +50,28 @@ class APICallerService
         $goal = $latestSprint['goal'];
         $sprintId = $latestSprint['id'];
 
-        $issues = $client->get('http://jira.tactics.be:8080/rest/agile/1.0/board/1/sprint/' . $sprintId .'/issue', [
+        $issues = $client->get('http://jira.tactics.be:8080/rest/agile/1.0/board/1/sprint/' . $sprintId .'/issue/', [
             'auth' => [
                 $this->username, $this->password
-                //200 issues per request
+                //50 issues per request
             ]
         ]);
 
         $issues = json_decode($issues->getBody()->getContents(), true);
+
+        if ($issues['total'] > 50)
+        {
+            $issues100 = $client->get('http://jira.tactics.be:8080/rest/agile/1.0/board/1/sprint/' . $sprintId .'/issue?startAt=51', [
+                'auth' => [
+                    $this->username, $this->password
+                    //50 issues per request
+                ]
+            ]);
+            $issues100 = json_decode($issues100->getBody()->getContents(), true);
+
+            $issues['issues'] = array_merge($issues['issues'], $issues100['issues']);
+
+        }
         $sprint = [
             'sprintname' => $sprintname,
             'goal' => $goal,
