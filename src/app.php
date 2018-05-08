@@ -24,8 +24,5 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
 $app["api_caller_service"] = function() use ($app, $config) {
     return new APICallerService($config['username'], $config['password']);
 };
-$app["issue_service_provider"] = function() use ($app){
-    return new IssueServiceProvider();
-};
 
 return $app;

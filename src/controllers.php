@@ -19,13 +19,20 @@ $app->get('/stijn', function () use ($app) {
 
     $mapper = new Mapper($result);
     $sprint = $mapper->getSprint();
-    $issues = $mapper->getIssues();
-    //$todos = $mapper->getToDoIssues();
-    phpinfo();
-    exit();
+
+    $todos = $mapper->getToDoIssues();
+    $inProgress = $mapper->getInProgress();
+    $waitingForValidation = $mapper->getWaitingForValidation();
+    $done = $mapper->getDone();
+    $inProduction = $mapper->getInProduction();
+
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,
-        'issues' => $issues
+        'todos' => $todos,
+        'inProgress' => $inProgress,
+        'waitingForValidations' => $waitingForValidation,
+        'dones' => $done,
+        'inProductions' => $inProduction
     ));
 
 });

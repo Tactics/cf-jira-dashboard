@@ -49,31 +49,31 @@ class Mapper
         return $this->sprint;
     }
 
-    public function getToDoIssues(): ?Issue
+    public function getToDoIssues(): ?array
     {
         $toDos = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'To Do'); });
         return $toDos;
     }
 
-    public function getInProgress(): ?Issue
+    public function getInProgress(): ?array
     {
         $inProgress = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Progress'); });
         return $inProgress;
     }
 
-    public function getDone(): ?Issue
+    public function getDone(): ?array
     {
         $done = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Done'); });
         return $done;
     }
 
-    public function getWaitingForValidation(): ?Issue
+    public function getWaitingForValidation(): ?array
     {
         $waitingForValidation = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Waiting For Validation'); });
         return $waitingForValidation;
     }
 
-    public function inProduction(): ?Issue
+    public function getInProduction(): ?array
     {
         $inProduction = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Production'); });
         return $inProduction;
