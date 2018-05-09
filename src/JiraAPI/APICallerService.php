@@ -38,6 +38,7 @@ class APICallerService
          * http://jira.tactics.be:8080/rest/agile/latest/board/1
          */
 
+        //@todo: Try catch voor wanneer er geen active sprint is
         $client = new Client();
         $latestSprint = $client->get('http://jira.tactics.be:8080/rest/agile/latest/board/1/sprint?state=active', [
             'auth' => [

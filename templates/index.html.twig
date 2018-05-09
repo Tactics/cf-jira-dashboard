@@ -13,30 +13,30 @@
             <div class="row">
                 <h3>ToDo</h3>
             </div>
-            {% for todo in todos %}
+            {% for openIssue in openIssues %}
                 <div class="row">
                     <div class="col-md-3">
-                        {{ todo.id }}
+                        {{ openIssue.id }}
                     </div>
                     <div class="col-md-9">
-                        <a href="{{ todo.link }}">{{ todo.key }}</a>
+                        <a href="{{ openIssue.link }}">{{ openIssue.key }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        {% if todo.assignee %}
-                            {{ todo.assignee }}
+                        {% if openIssue.assignee %}
+                            {{ openIssue.assignee }}
                         {% else %}
                             no assignee
                         {% endif %}
                     </div>
                     <div class="col-md-7">
-                        {{ todo.status }}
+                        {{ openIssue.status }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="row-md-12">
-                        {{ todo.shortInfo }}
+                        {{ openIssue.shortInfo }}
                     </div>
                 </div>
                 <br>
@@ -48,30 +48,30 @@
             <div class="row">
                 <h3>In Progress</h3>
             </div>
-            {% for inProg in inProgress %}
+            {% for inProgressIssue in inProgressIssues %}
                 <div class="row">
                     <div class="col-md-3">
-                        {{ inProg.id }}
+                        {{ inProgressIssue.id }}
                     </div>
                     <div class="col-md-9">
-                        <a href="{{ inProg.link }}">{{ inProg.key }}</a>
+                        <a href="{{ inProgressIssue.link }}">{{ inProgressIssue.key }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        {% if inProg.assignee %}
-                            {{ inProg.assignee }}
+                        {% if inProgressIssue.assignee %}
+                            {{ inProgressIssue.assignee }}
                         {% else %}
                             no assignee
                         {% endif %}
                     </div>
                     <div class="col-md-7">
-                        {{ inProg.status }}
+                        {{ inProgressIssue.status }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="row-md-12">
-                        {{ inProg.shortInfo }}
+                        {{ inProgressIssue.shortInfo }}
                     </div>
                 </div>
                 <br>
@@ -82,30 +82,30 @@
             <div class="row">
                 <h3>Waiting for validation</h3>
             </div>
-            {% for waitingForValidation in waitingForValidations %}
+            {% for toReviewIssue in toReviewIssues %}
                 <div class="row">
                     <div class="col-md-3">
-                        {{ waitingForValidation.id }}
+                        {{ toReviewIssue.id }}
                     </div>
                     <div class="col-md-9">
-                        <a href="{{ waitingForValidation.link }}">{{ waitingForValidation.key }}</a>
+                        <a href="{{ toReviewIssue.link }}">{{ toReviewIssue.key }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        {% if waitingForValidation.assignee %}
-                            {{ waitingForValidation.assignee }}
+                        {% if toReviewIssue.assignee %}
+                            {{ toReviewIssue.assignee }}
                         {% else %}
                             no assignee
                         {% endif %}
                     </div>
                     <div class="col-md-7">
-                        {{ waitingForValidation.status }}
+                        {{ toReviewIssue.status }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="row-md-12">
-                        {{ waitingForValidation.shortInfo }}
+                        {{ toReviewIssue.shortInfo }}
                     </div>
                 </div>
                 <br>
@@ -116,30 +116,30 @@
             <div class="row">
                 <h3>Done</h3>
             </div>
-            {% for done in dones %}
+            {% for doneIssue in doneIssues %}
                 <div class="row">
                     <div class="col-md-3">
-                        {{ done.id }}
+                        {{ doneIssue.id }}
                     </div>
                     <div class="col-md-9">
-                        <a href="{{ done.link }}">{{ done.key }}</a>
+                        <a href="{{ doneIssue.link }}">{{ doneIssue.key }}</a>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-5">
-                        {% if done.assignee %}
-                            {{ done.assignee }}
+                        {% if doneIssue.assignee %}
+                            {{ doneIssue.assignee }}
                         {% else %}
                             no assignee
                         {% endif %}
                     </div>
                     <div class="col-md-7">
-                        {{ done.status }}
+                        {{ doneIssue.status }}
                     </div>
                 </div>
                 <div class="row">
                     <div class="row-md-12">
-                        {{ done.shortInfo }}
+                        {{ doneIssue.shortInfo }}
                     </div>
                 </div>
                 <br>
@@ -150,30 +150,30 @@
         <div class="row">
             <h3>In production</h3>
         </div>
-        {% for inProduction in inProductions %}
+        {% for closedIssue in closedIssues %}
             <div class="row">
                 <div class="col-md-3">
-                    {{ inProduction.id }}
+                    {{ closedIssue.id }}
                 </div>
                 <div class="col-md-9">
-                    <a href="{{ inProduction.link }}">{{ inProduction.key }}</a>
+                    <a href="{{ closedIssue.link }}">{{ closedIssue.key }}</a>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-5">
-                    {% if inProduction.assignee %}
-                        {{ inProduction.assignee }}
+                    {% if closedIssue.assignee %}
+                        {{ closedIssue.assignee }}
                     {% else %}
                         no assignee
                     {% endif %}
                 </div>
                 <div class="col-md-7">
-                    {{ inProduction.status }}
+                    {{ closedIssue.status }}
                 </div>
             </div>
             <div class="row">
                 <div class="row-md-12">
-                    {{ inProduction.shortInfo }}
+                    {{ closedIssue.shortInfo }}
                 </div>
             </div>
             <br>

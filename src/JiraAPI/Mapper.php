@@ -2,12 +2,6 @@
 declare(strict_types=1);
 
 namespace JiraAPI;
-define(OPEN, 'open');
-define(IN_PROGRESS,'In Progress');
-define(TO_REVIEW, 'To Review');
-define(RESOLVED, 'Resolved');
-define(REOPENED, 'Reopened');
-define(CLOSED, 'Closed');
 
 class Mapper
 {
@@ -46,44 +40,9 @@ class Mapper
         }
     }
 
-    public function getIssueById($id): Issue
-    {
-        $filtered = array_filter($this->issues, function(Issue $var) use ($id) { return ($var->getId() === $id); } );
-        return reset($filtered);
-    }
-
     public function getSprint(): Sprint
     {
         return $this->sprint;
-    }
-
-    public function getOpenIssues(): ?array
-    {
-        $openIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === OPEN) || ($var->getStateName() === REOPENED); });
-        return $openIssues;
-    }
-
-    public function getInProgressIssues(): ?array
-    {
-        $inProgressIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === IN_PROGRESS); });
-        return $inProgressIssues;
-    }
-
-    public function getToReviewIssues(): ?array
-    {
-        $toReviewIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === TO_REVIEW); });
-        return $toReviewIssues;
-    }
-    public function getDoneIssues(): ?array
-    {
-        $doneIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === RESOLVED); });
-        return $doneIssues;
-    }
-
-    public function getClosedIssues(): ?array
-    {
-        $closedIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === CLOSED); });
-        return $closedIssues;
     }
 
     /**
