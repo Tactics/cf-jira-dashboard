@@ -6,6 +6,53 @@
     <h2>{{ sprint.goal }}</h2>
 
     <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+            <div class="row">
+                ToDo
+            </div>
+            <div class="row">
+                {{ openIssuesPercentage }}%
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                In Progress
+            </div>
+            <div class="row">
+                {{ inProgressIssuesPercentage }}%
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Waiting For Validation
+            </div>
+            <div class="row">
+                {{ toReviewIssuesPercentage  }}%
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                Done
+            </div>
+            <div class="row">
+                {{ doneIssuesPercentage }}%
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                In Production
+            </div>
+            <div class="row">
+                {{ closedIssuesPercentage }}%
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="row">
         <div class="col-md-1">
             <!--zotte extra buttons-->
         </div>

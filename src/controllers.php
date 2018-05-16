@@ -39,11 +39,18 @@ $app->get('/dashboard', function () use ($app) {
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,
+
         'openIssues' => $openIssues,
         'inProgressIssues' => $inProgressIssues,
         'toReviewIssues' => $toReviewIssues,
         'doneIssues' => $doneIssues,
-        'closedIssues' => $closedIssues
+        'closedIssues' => $closedIssues,
+
+        'openIssuesPercentage' => $openIssuesPercentage,
+        'inProgressIssuesPercentage' => $inProgressIssuesPercentage,
+        'toReviewIssuesPercentage' => $toReviewIssuesPercentage,
+        'doneIssuesPercentage' => $doneIssuesPercentage,
+        'closedIssuesPercentage' => $closedIssuesPercentage
     ));
 
 });
