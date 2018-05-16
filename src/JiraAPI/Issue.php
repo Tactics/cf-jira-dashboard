@@ -12,8 +12,9 @@ class Issue
     private $status;
     private $statkey;
     private $stateName;
+    private $customfields;
 
-    public function __construct($id, $key, $link, $shortInfo, $assignee,$status,$statkey, $stateName)
+    public function __construct($id, $key, $link, $shortInfo, $assignee,$status,$statkey, $stateName, $customfields)
     {
         $this->id = $id;
         $this->key = $key;
@@ -23,6 +24,7 @@ class Issue
         $this->assignee = $assignee;
         $this->statkey = $statkey;
         $this->stateName = $stateName;
+        $this->customfields = $customfields;
     }
 
 
@@ -84,4 +86,8 @@ class Issue
         return $this->assignee;
     }
 
+    public function getCustomfields()
+    {
+        return $this->customfields;
+    }
 }

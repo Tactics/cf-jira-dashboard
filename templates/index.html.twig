@@ -50,8 +50,9 @@
 
     </div>
 
-
-
+    {% for issue in issues %}
+        {{ dump(issue.customfields) }}
+    {% endfor %}
     <div class="row">
         <div class="col-md-1">
             <!--zotte extra buttons-->

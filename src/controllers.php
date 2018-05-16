@@ -21,7 +21,6 @@ $app->get('/dashboard', function () use ($app) {
 
     $sprint = $mapper->getSprint();
     $issues = $mapper->getIssues();
-
     $issueRepository = new IssueRepository($issues);
 
     $openIssues = $issueRepository->getOpenIssues();
@@ -39,6 +38,7 @@ $app->get('/dashboard', function () use ($app) {
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,
+        'issues' => $issues,
 
         'openIssues' => $openIssues,
         'inProgressIssues' => $inProgressIssues,
