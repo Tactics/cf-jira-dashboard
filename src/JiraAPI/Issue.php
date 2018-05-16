@@ -11,9 +11,9 @@ class Issue
     private $assignee;
     private $status;
     private $statkey;
-    private $statid;
+    private $stateName;
 
-    public function __construct($id, $key, $link, $shortInfo, $assignee,$status)//$statkey, $statid
+    public function __construct($id, $key, $link, $shortInfo, $assignee,$status,$statkey, $stateName)
     {
         $this->id = $id;
         $this->key = $key;
@@ -21,20 +21,20 @@ class Issue
         $this->status = $status;
         $this->link = $link;
         $this->assignee = $assignee;
-        //$this->statkey = $statkey;
-        //$this->statid = $statid;
+        $this->statkey = $statkey;
+        $this->stateName = $stateName;
     }
 
 
-    /*public function getStatkey()
+    public function getStatkey()
     {
         return $this->statkey;
     }
 
-    public function getStatid()
+    public function getStateName()
     {
-        return $this->statid;
-    }*/
+        return $this->stateName;
+    }
 
     /**
      * @return mixed

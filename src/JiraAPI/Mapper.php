@@ -34,16 +34,10 @@ class Mapper
             $assignee = $issue['fields']['assignee']['name'];
             $status = $issue['fields']['status']['statusCategory']['name'];
             $statkey = $issue['fields']['status']['statusCategory']['key'];
-            $statid = $issue['fields']['status']['id'];
+            $stateName = $issue['fields']['status']['name'];
 
-            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $statid));
+            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $stateName));
         }
-    }
-
-    public function getIssueById($id): Issue
-    {
-        $filtered = array_filter($this->issues, function(Issue $var) use ($id) { return ($var->getId() === $id); } );
-        return reset($filtered);
     }
 
     public function getSprint(): Sprint
@@ -51,35 +45,6 @@ class Mapper
         return $this->sprint;
     }
 
-    public function getToDoIssues(): ?array
-    {
-        $toDos = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'To Do'); });
-        return $toDos;
-    }
-
-    public function getInProgress(): ?array
-    {
-        $inProgress = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Progress'); });
-        return $inProgress;
-    }
-
-    public function getDone(): ?array
-    {
-        $done = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Done'); });
-        return $done;
-    }
-
-    public function getWaitingForValidation(): ?array
-    {
-        $waitingForValidation = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'Waiting For Validation'); });
-        return $waitingForValidation;
-    }
-
-    public function getInProduction(): ?array
-    {
-        $inProduction = array_filter($this->issues, function(Issue $var) { return ($var->getStatus() === 'In Production'); });
-        return $inProduction;
-    }
     /**
      * @return array
      */

@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use JiraAPI\Mapper;
+use JiraAPI\IssueRepository;
 //Request::setTrustedProxies(array('127.0.0.1'));
 
 $app->get('/', function () use ($app) {
@@ -14,26 +15,42 @@ $app->get('/', function () use ($app) {
 ->bind('homepage')
 ;
 
-$app->get('/stijn', function () use ($app) {
+$app->get('/dashboard', function () use ($app) {
     $result = $app['api_caller_service']->getClearfactsSprint();
-
     $mapper = new Mapper($result);
 
     $sprint = $mapper->getSprint();
+    $issues = $mapper->getIssues();
 
-    $todos = $mapper->getToDoIssues();
-    $inProgress = $mapper->getInProgress();
-    $waitingForValidation = $mapper->getWaitingForValidation();
-    $done = $mapper->getDone();
-    $inProduction = $mapper->getInProduction();
+    $issueRepository = new IssueRepository($issues);
+
+    $openIssues = $issueRepository->getOpenIssues();
+    $inProgressIssues = $issueRepository->getInProgressIssues();
+    $toReviewIssues = $issueRepository->getToReviewIssues();
+    $doneIssues = $issueRepository->getDoneIssues();
+    $closedIssues = $issueRepository->getClosedIssues();
+
+    $total = $issueRepository->getTotalIssues();
+    $openIssuesPercentage = $issueRepository->getOpenIssuesPercentage($total);
+    $inProgressIssuesPercentage = $issueRepository->getInProgressIssuesPercentage($total);
+    $toReviewIssuesPercentage = $issueRepository->getToReviewIssuesPercentage($total);
+    $doneIssuesPercentage = $issueRepository->getDoneIssuesPercentage($total);
+    $closedIssuesPercentage = $issueRepository->getClosedIssuesPercentage($total);
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,
-        'todos' => $todos,
-        'inProgress' => $inProgress,
-        'waitingForValidations' => $waitingForValidation,
-        'dones' => $done,
-        'inProductions' => $inProduction
+
+        'openIssues' => $openIssues,
+        'inProgressIssues' => $inProgressIssues,
+        'toReviewIssues' => $toReviewIssues,
+        'doneIssues' => $doneIssues,
+        'closedIssues' => $closedIssues,
+
+        'openIssuesPercentage' => $openIssuesPercentage,
+        'inProgressIssuesPercentage' => $inProgressIssuesPercentage,
+        'toReviewIssuesPercentage' => $toReviewIssuesPercentage,
+        'doneIssuesPercentage' => $doneIssuesPercentage,
+        'closedIssuesPercentage' => $closedIssuesPercentage
     ));
 
 });
