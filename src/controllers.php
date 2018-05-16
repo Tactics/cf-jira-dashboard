@@ -15,7 +15,7 @@ $app->get('/', function () use ($app) {
 ->bind('homepage')
 ;
 
-$app->get('/stijn', function () use ($app) {
+$app->get('/dashboard', function () use ($app) {
     $result = $app['api_caller_service']->getClearfactsSprint();
     $mapper = new Mapper($result);
 
@@ -30,6 +30,12 @@ $app->get('/stijn', function () use ($app) {
     $doneIssues = $issueRepository->getDoneIssues();
     $closedIssues = $issueRepository->getClosedIssues();
 
+    $total = $issueRepository->getTotalIssues();
+    $openIssuesPercentage = $issueRepository->getOpenIssuesPercentage($total);
+    $inProgressIssuesPercentage = $issueRepository->getInProgressIssuesPercentage($total);
+    $toReviewIssuesPercentage = $issueRepository->getToReviewIssuesPercentage($total);
+    $doneIssuesPercentage = $issueRepository->getDoneIssuesPercentage($total);
+    $closedIssuesPercentage = $issueRepository->getClosedIssuesPercentage($total);
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,

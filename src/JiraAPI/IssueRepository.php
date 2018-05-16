@@ -4,7 +4,7 @@ namespace JiraAPI;
 
 const OPEN = 'open';
 const IN_PROGRESS = 'In Progress';
-const TO_REVIEW = 'To Review';
+const REVIEW = 'Review';
 const RESOLVED = 'Resolved';
 const REOPENED = 'Reopened';
 const CLOSED = 'Closed';
@@ -32,7 +32,7 @@ class IssueRepository
 
     public function getToReviewIssues(): ?array
     {
-        $toReviewIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === TO_REVIEW); });
+        $toReviewIssues = array_filter($this->issues, function(Issue $var) { return ($var->getStateName() === REVIEW); });
         return $toReviewIssues;
     }
     public function getDoneIssues(): ?array
@@ -51,6 +51,49 @@ class IssueRepository
     {
         $filtered = array_filter($this->issues, function(Issue $var) use ($id) { return ($var->getId() === $id); } );
         return reset($filtered);
+    }
+
+    public function getTotalIssues(): int
+    {
+        $openIssues = $this->getOpenIssues();
+        $inProgressIssues = $this->getInProgressIssues();
+        $toReviewIssues = $this->getToReviewIssues();
+        $doneIssues = $this->getDoneIssues();
+        $closedIssues = $this->getClosedIssues();
+
+        $totalIssues = 0;
+        $totalIssues += count($openIssues);
+        $totalIssues += count($inProgressIssues);
+        $totalIssues += count($toReviewIssues);
+        $totalIssues += count($doneIssues);
+        $totalIssues += count($closedIssues);
+
+        return $totalIssues;
+    }
+
+    public function getOpenIssuesPercentage(int $totalIssues): float
+    {
+        return round(((count($this->getOpenIssues()) / $totalIssues) * 100), 2);
+    }
+
+    public function getInProgressIssuesPercentage(int $totalIssues): float
+    {
+        return round(((count($this->getInProgressIssues()) / $totalIssues) * 100),2);
+    }
+
+    public function getToReviewIssuesPercentage(int $totalIssues): float
+    {
+        return round(((count($this->getToReviewIssues()) / $totalIssues) * 100),2);
+    }
+
+    public function getDoneIssuesPercentage(int $totalIssues): float
+    {
+        return round(((count($this->getDoneIssues()) / $totalIssues) * 100),2);
+    }
+
+    public function getClosedIssuesPercentage(int $totalIssues): float
+    {
+        return round(((count($this->getClosedIssues()) / $totalIssues) * 100),2);
     }
 
 }
