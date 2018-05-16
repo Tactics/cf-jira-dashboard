@@ -9,9 +9,9 @@
         <div class="col-md-1">
             <!--zotte extra buttons-->
         </div>
-        <div class="col-md-2">
+        <div class="col-md-2 jira-column">
             <div class="row">
-                <h3>ToDo</h3>
+                <h3 class="col-title">ToDo</h3>
             </div>
             {% for todo in todos %}
                 <div class="row">
@@ -23,19 +23,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-5">
+                    <div class="row small-text-block">
                         {% if todo.assignee %}
                             {{ todo.assignee }}
                         {% else %}
                             no assignee
                         {% endif %}
                     </div>
-                    <div class="col-md-7">
+                    <div class="row small-text-block">
                         {{ todo.status }}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="row-md-12">
+                    <div class="col-md-12">
                         {{ todo.shortInfo }}
                     </div>
                 </div>
@@ -44,9 +44,9 @@
         </div>
 
 
-        <div class="col-md-2">
+        <div class="col-md-2 jira-column">
             <div class="row">
-                <h3>In Progress</h3>
+                <h3 class="col-title">In Progress</h3>
             </div>
             {% for inProg in inProgress %}
                 <div class="row">
@@ -70,7 +70,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="row-md-12">
+                    <div class="col-md-12">
                         {{ inProg.shortInfo }}
                     </div>
                 </div>
@@ -78,9 +78,9 @@
             {% endfor %}
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 jira-column">
             <div class="row">
-                <h3>Waiting for validation</h3>
+                <h3 class="col-title">Waiting for validation</h3>
             </div>
             {% for waitingForValidation in waitingForValidations %}
                 <div class="row">
@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="row-md-12">
+                    <div class="col-md-12">
                         {{ waitingForValidation.shortInfo }}
                     </div>
                 </div>
@@ -112,9 +112,9 @@
             {% endfor %}
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 jira-column">
             <div class="row">
-                <h3>Done</h3>
+                <h3 class="col-title">Done</h3>
             </div>
             {% for done in dones %}
                 <div class="row">
@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="row-md-12">
+                    <div class="col-md-12">
                         {{ done.shortInfo }}
                     </div>
                 </div>
@@ -146,9 +146,9 @@
             {% endfor %}
         </div>
 
-        <div class="col-md-2">
+        <div class="col-md-2 jira-column">
         <div class="row">
-            <h3>In production</h3>
+            <h3 class="col-title">In production</h3>
         </div>
         {% for inProduction in inProductions %}
             <div class="row">
@@ -172,7 +172,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="row-md-12">
+                <div class="col-md-12">
                     {{ inProduction.shortInfo }}
                 </div>
             </div>
