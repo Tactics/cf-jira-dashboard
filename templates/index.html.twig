@@ -1,234 +1,70 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-
-    <h1>{{ sprint.name }} id: {{  sprint.id  }}</h1>
-    <h2>{{ sprint.goal }}</h2>
-
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-2">
             <div class="row">
-                ToDo
+                <h3>To do</h3>
             </div>
             <div class="row">
-                {{ openIssuesPercentage }}%
+                {{ issues.openIssuesPercentage }}
             </div>
         </div>
         <div class="col-md-2">
             <div class="row">
-                In Progress
+                <h3>In progress</h3>
             </div>
             <div class="row">
-                {{ inProgressIssuesPercentage }}%
+                {{ issues.inProgressIssuesPercentage }}
             </div>
         </div>
-        <div class="col-md-2">
-            <div class="row">
-                Waiting For Validation
-            </div>
-            <div class="row">
-                {{ toReviewIssuesPercentage  }}%
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="row">
-                Done
-            </div>
-            <div class="row">
-                {{ doneIssuesPercentage }}%
-            </div>
-        </div>
-        <div class="col-md-2">
-            <div class="row">
-                In Production
-            </div>
-            <div class="row">
-                {{ closedIssuesPercentage }}%
-            </div>
-        </div>
-
-    </div>
-
-    {% for issue in issues %}
-        {{ dump(issue.customfields) }}
-    {% endfor %}
-    <div class="row">
-        <div class="col-md-1">
-            <!--zotte extra buttons-->
-        </div>
-        <div class="col-md-2">
-            <div class="row">
-                <h3>ToDo</h3>
-            </div>
-            {% for openIssue in openIssues %}
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ openIssue.id }}
-                    </div>
-                    <div class="col-md-9">
-                        <a href="{{ openIssue.link }}">{{ openIssue.key }}</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        {% if openIssue.assignee %}
-                            {{ openIssue.assignee }}
-                        {% else %}
-                            no assignee
-                        {% endif %}
-                    </div>
-                    <div class="col-md-7">
-                        {{ openIssue.status }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row-md-12">
-                        {{ openIssue.shortInfo }}
-                    </div>
-                </div>
-                <br>
-            {% endfor %}
-        </div>
-
-
-        <div class="col-md-2">
-            <div class="row">
-                <h3>In Progress</h3>
-            </div>
-            {% for inProgressIssue in inProgressIssues %}
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ inProgressIssue.id }}
-                    </div>
-                    <div class="col-md-9">
-                        <a href="{{ inProgressIssue.link }}">{{ inProgressIssue.key }}</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        {% if inProgressIssue.assignee %}
-                            {{ inProgressIssue.assignee }}
-                        {% else %}
-                            no assignee
-                        {% endif %}
-                    </div>
-                    <div class="col-md-7">
-                        {{ inProgressIssue.status }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row-md-12">
-                        {{ inProgressIssue.shortInfo }}
-                    </div>
-                </div>
-                <br>
-            {% endfor %}
-        </div>
-
         <div class="col-md-2">
             <div class="row">
                 <h3>Waiting for validation</h3>
             </div>
-            {% for toReviewIssue in toReviewIssues %}
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ toReviewIssue.id }}
-                    </div>
-                    <div class="col-md-9">
-                        <a href="{{ toReviewIssue.link }}">{{ toReviewIssue.key }}</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        {% if toReviewIssue.assignee %}
-                            {{ toReviewIssue.assignee }}
-                        {% else %}
-                            no assignee
-                        {% endif %}
-                    </div>
-                    <div class="col-md-7">
-                        {{ toReviewIssue.status }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row-md-12">
-                        {{ toReviewIssue.shortInfo }}
-                    </div>
-                </div>
-                <br>
-            {% endfor %}
+            <div class="row">
+                {{ issues.toReviewIssuesPercentage }}
+            </div>
         </div>
-
         <div class="col-md-2">
             <div class="row">
                 <h3>Done</h3>
             </div>
-            {% for doneIssue in doneIssues %}
-                <div class="row">
-                    <div class="col-md-3">
-                        {{ doneIssue.id }}
-                    </div>
-                    <div class="col-md-9">
-                        <a href="{{ doneIssue.link }}">{{ doneIssue.key }}</a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-5">
-                        {% if doneIssue.assignee %}
-                            {{ doneIssue.assignee }}
-                        {% else %}
-                            no assignee
-                        {% endif %}
-                    </div>
-                    <div class="col-md-7">
-                        {{ doneIssue.status }}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="row-md-12">
-                        {{ doneIssue.shortInfo }}
-                    </div>
-                </div>
-                <br>
+            <div class="row">
+                {{ issues.doneIssuesPercentage }}
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="row">
+                <h3>In production</h3>
+            </div>
+            <div class="row">
+                {{ issues.closedIssuesPercentage }}
+            </div>
+        </div>
+
+    </div>
+
+    {% for issue in issues.issues %}
+        <div class="row">
+            <div class="col-md-2">
+                {{ issue.key }}
+            </div>
+            {% for customfield in issue.customfields %}
+                <div class="col-md-2">
+                    {{ customfield['name'] }}
+                    {% if customfield.checked %}
+                        <i class="far fa-check-square"></i>
+                    {% else %}
+                    <i class="far fa-square"></i>
+                {% endif %}
+            </div>
+                {% if loop.index % 5 == 0 %}
+                    </div><div class="row"><div class="col-md-2"></div>
+                {% endif %}
             {% endfor %}
         </div>
-
-        <div class="col-md-2">
-        <div class="row">
-            <h3>In production</h3>
-        </div>
-        {% for closedIssue in closedIssues %}
-            <div class="row">
-                <div class="col-md-3">
-                    {{ closedIssue.id }}
-                </div>
-                <div class="col-md-9">
-                    <a href="{{ closedIssue.link }}">{{ closedIssue.key }}</a>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5">
-                    {% if closedIssue.assignee %}
-                        {{ closedIssue.assignee }}
-                    {% else %}
-                        no assignee
-                    {% endif %}
-                </div>
-                <div class="col-md-7">
-                    {{ closedIssue.status }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="row-md-12">
-                    {{ closedIssue.shortInfo }}
-                </div>
-            </div>
-            <br>
-        {% endfor %}
-    </div>
-    </div>
-
-
-
+        </br>
+    {% endfor %}
 {% endblock %}

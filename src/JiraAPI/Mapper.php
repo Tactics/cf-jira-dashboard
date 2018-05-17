@@ -39,6 +39,7 @@ class Mapper
 
             array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $stateName, $customfields));
         }
+        asort($this->issues);
     }
 
     public function getSprint(): Sprint

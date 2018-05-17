@@ -98,4 +98,9 @@ class IssueRepository
         return round(((count($this->getClosedIssues()) / $this->totalIssues) * 100),2);
     }
 
+    public function getIssues()
+    {
+        return $this->issues;
+    }
+
 }
