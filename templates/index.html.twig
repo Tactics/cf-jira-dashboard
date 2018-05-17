@@ -1,6 +1,10 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
+    <form>
+        Search: <input type="text" id="search">
+    </form>
+
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-2">
@@ -48,10 +52,11 @@
     </br>
     {% for issue in issues.issues %}
         <div class="row">
+
             <div class="col-md-2">
                 <a href="{{ issue.link }}" target="_blank">{{ issue.key }}</a>
             </br>
-                <input type="button" class="addToMail" name="{{ issue.link }}" value="Add to mail">
+                <input type="button" class="undo" name="{{ issue.link }}" value="Add to mail">
             </div>
             {% for customfield in issue.customfields %}
                 <div class="col-md-2">
@@ -63,11 +68,11 @@
                 {% endif %}
             </div>
                 {% if loop.index % 5 == 0 %}
-                    </div></br><div class="row"><div class="col-md-2"></div>
+                    </br></br><div class="col-md-2"></div>
                 {% endif %}
             {% endfor %}
         </div>
-        <hr>
-        </br>
+
+        
     {% endfor %}
 {% endblock %}
