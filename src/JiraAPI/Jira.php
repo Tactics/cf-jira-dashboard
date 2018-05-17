@@ -7,7 +7,7 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use GuzzleHttp\Client;
 
-class APICallerService implements BacklogApi
+class Jira implements BacklogApi
 {
     public function getSprint(): Sprint
     {

@@ -1,6 +1,6 @@
 <?php
 
-use JiraAPI\APICallerService;
+use JiraAPI\Jira;
 use JiraAPI\IssueServiceProvider;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
@@ -22,7 +22,7 @@ $app['twig'] = $app->extend('twig', function ($twig, $app) {
 });
 
 $app["api_caller_service"] = function() use ($app, $config) {
-    return new APICallerService($config['username'], $config['password']);
+    return new Jira($config['username'], $config['password']);
 };
 
 return $app;
