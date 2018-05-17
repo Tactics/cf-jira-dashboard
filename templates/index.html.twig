@@ -8,7 +8,7 @@
                 <h3>To do</h3>
             </div>
             <div class="row">
-                {{ issues.openIssuesPercentage }}
+                <h4>{{ issues.openIssuesPercentage }}%</h4>
             </div>
         </div>
         <div class="col-md-2">
@@ -16,7 +16,7 @@
                 <h3>In progress</h3>
             </div>
             <div class="row">
-                {{ issues.inProgressIssuesPercentage }}
+                <h4>{{ issues.inProgressIssuesPercentage }}%</h4>
             </div>
         </div>
         <div class="col-md-2">
@@ -24,7 +24,7 @@
                 <h3>Waiting for validation</h3>
             </div>
             <div class="row">
-                {{ issues.toReviewIssuesPercentage }}
+                <h4>{{ issues.toReviewIssuesPercentage }}%</h4>
             </div>
         </div>
         <div class="col-md-2">
@@ -32,7 +32,7 @@
                 <h3>Done</h3>
             </div>
             <div class="row">
-                {{ issues.doneIssuesPercentage }}
+                <h4>{{ issues.doneIssuesPercentage }}%</h4>
             </div>
         </div>
         <div class="col-md-2">
@@ -40,16 +40,18 @@
                 <h3>In production</h3>
             </div>
             <div class="row">
-                {{ issues.closedIssuesPercentage }}
+                <h4>{{ issues.closedIssuesPercentage }}%</h4>
             </div>
         </div>
 
     </div>
-
+    </br>
     {% for issue in issues.issues %}
         <div class="row">
             <div class="col-md-2">
-                {{ issue.key }}
+                <a href="{{ issue.link }}" target="_blank">{{ issue.key }}</a>
+            </br>
+                <input type="button" class="addToMail" name="{{ issue.link }}" value="Add to mail">
             </div>
             {% for customfield in issue.customfields %}
                 <div class="col-md-2">
@@ -61,10 +63,11 @@
                 {% endif %}
             </div>
                 {% if loop.index % 5 == 0 %}
-                    </div><div class="row"><div class="col-md-2"></div>
+                    </div></br><div class="row"><div class="col-md-2"></div>
                 {% endif %}
             {% endfor %}
         </div>
+        <hr>
         </br>
     {% endfor %}
 {% endblock %}
