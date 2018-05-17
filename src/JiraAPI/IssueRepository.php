@@ -13,9 +13,11 @@ const CLOSED = 'Closed';
 class IssueRepository
 {
     private $issues;
+    private $totalIssues;
     public function __construct(array $issues)
     {
         $this->issues = $issues;
+        $this->totalIssues = $this->getTotalIssues();
     }
 
     public function getOpenIssues(): ?array
@@ -71,29 +73,29 @@ class IssueRepository
         return $totalIssues;
     }
 
-    public function getOpenIssuesPercentage(int $totalIssues): float
+    public function getOpenIssuesPercentage(): float
     {
-        return round(((count($this->getOpenIssues()) / $totalIssues) * 100), 2);
+        return round(((count($this->getOpenIssues()) / $this->totalIssues) * 100), 2);
     }
 
-    public function getInProgressIssuesPercentage(int $totalIssues): float
+    public function getInProgressIssuesPercentage(): float
     {
-        return round(((count($this->getInProgressIssues()) / $totalIssues) * 100),2);
+        return round(((count($this->getInProgressIssues()) / $this->totalIssues) * 100),2);
     }
 
-    public function getToReviewIssuesPercentage(int $totalIssues): float
+    public function getToReviewIssuesPercentage(): float
     {
-        return round(((count($this->getToReviewIssues()) / $totalIssues) * 100),2);
+        return round(((count($this->getToReviewIssues()) / $this->totalIssues) * 100),2);
     }
 
-    public function getDoneIssuesPercentage(int $totalIssues): float
+    public function getDoneIssuesPercentage(): float
     {
-        return round(((count($this->getDoneIssues()) / $totalIssues) * 100),2);
+        return round(((count($this->getDoneIssues()) / $this->totalIssues) * 100),2);
     }
 
-    public function getClosedIssuesPercentage(int $totalIssues): float
+    public function getClosedIssuesPercentage(): float
     {
-        return round(((count($this->getClosedIssues()) / $totalIssues) * 100),2);
+        return round(((count($this->getClosedIssues()) / $this->totalIssues) * 100),2);
     }
 
 }

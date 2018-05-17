@@ -7,8 +7,19 @@ use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use GuzzleHttp\Client;
 
-class APICallerService
+class APICallerService implements BacklogApi
 {
+    public function getSprint(): Sprint
+    {
+        return $this->mapper->getSprint();
+    }
+
+    public function getIssues(): IssueRepository
+    {
+        $issues = $this->mapper->getIssues();
+        return new IssueRepository($issues);
+    }
+
     /*If you have a url and your php supports it, you could just call file_get_contents:
 
     $response = file_get_contents('http://example.com/path/to/api/call?param1=5');
@@ -21,12 +32,14 @@ class APICallerService
 
     private $username;
     private $password;
+    private $mapper;
 
-    public function __construct($username, $password)
+    public function __construct(/*$username, $password*/)
     {
-
-        $this->username = $username;
-        $this->password = $password;
+        $config = require __DIR__ . '/../../secrets/secrets.php';
+        $this->username = $config['username'];
+        $this->password = $config['password'];
+        $this->getClearfactsSprint();
     }
 
     public function getClearfactsSprint()
@@ -80,6 +93,6 @@ class APICallerService
             'issues' => $issues
         ];
 
-        return $sprint;
+        $this->mapper = new Mapper($sprint);
     }
 }
