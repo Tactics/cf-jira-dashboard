@@ -2,9 +2,9 @@
 
 {% block content %}
     <form>
-        Search: <input type="text" id="search">
+        Search: <input type="text" id="search"> <i class="fas fa-search"></i>
     </form>
-
+    <a href="{{ app.url_generator.generate('maildone') }}">mail done</a>
     <div class="row">
         <div class="col-md-1"></div>
         <div class="col-md-2">
@@ -51,11 +51,14 @@
     </div>
     </br>
     {% for issue in issues.issues %}
-        <div class="row">
+        <div class="row border">
+        <hr>
 
             <div class="col-md-2">
                 <a href="{{ issue.link }}" target="_blank">{{ issue.key }}</a>
-            </br>
+                </br>
+                {{ issue.type }}
+                </br>
                 <input type="button" class="undo" name="{{ issue.link }}" value="Add to mail">
             </div>
             {% for customfield in issue.customfields %}
@@ -64,15 +67,15 @@
                     {% if customfield.checked %}
                         <i class="far fa-check-square"></i>
                     {% else %}
-                    <i class="far fa-square"></i>
-                {% endif %}
-            </div>
+                        <i class="far fa-square"></i>
+                    {% endif %}
+                </div>
                 {% if loop.index % 5 == 0 %}
                     </br></br><div class="col-md-2"></div>
                 {% endif %}
             {% endfor %}
         </div>
 
-        
+
     {% endfor %}
 {% endblock %}
