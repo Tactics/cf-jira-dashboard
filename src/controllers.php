@@ -24,7 +24,7 @@ $app->get('/dashboard', function () use ($app) {
     $sprint = $jira->getSprint();
     /** @var IssueRepository $issues */
     $issues = $jira->getIssues();
-    $doneIssues = $jira->getDoneIssues();
+    $doneIssues = $jira->getDoneIssueLinks();
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,

@@ -10,28 +10,19 @@ class Issue
     private $link;
     private $assignee;
     private $status;
-    private $statkey;
     private $stateName;
     private $type;
     private $customfields;
-    public function __construct($id, $key, $link, $shortInfo, $assignee,$status,$statkey, $stateName, $type, $customfields)
+    public function __construct($id, $key, $link, $shortInfo, $assignee, $stateName, $type, $customfields)
     {
         $this->id = $id;
         $this->key = $key;
         $this->shortInfo = $shortInfo;
-        $this->status = $status;
         $this->link = $link;
         $this->assignee = $assignee;
-        $this->statkey = $statkey;
         $this->stateName = $stateName;
         $this->type = $type;
         $this->customfields = $customfields;
-    }
-
-
-    public function getStatkey()
-    {
-        return $this->statkey;
     }
 
     public function getStateName()

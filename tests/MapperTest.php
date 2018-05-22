@@ -20,9 +20,7 @@ class MapperTest extends \PHPUnit\Framework\TestCase
                            'id' => 30,
                            'fields' => [
                                'status' => [
-                                   'statusCategory' => [
-                                       'name' => 'Waiting for validation'
-                                   ]
+                                       'name' => 'Waiting for validation',
                                ],
 
                                    'summary' => 'een heel cool test issue'
@@ -30,33 +28,40 @@ class MapperTest extends \PHPUnit\Framework\TestCase
 
                                    'assignee' => [
                                        'name' => 'Joske'
-                                   ]
+                                   ],
+                               'customfield_11001' => '',
+                               'issuetype' => [
+                                   'name' => 'bug'
+                               ]
 
                            ]
                        ],
+
                         [
                             'key' => 'Testissue-256',
-                            'id' => 40,
+                            'id' => 30,
                             'fields' => [
-                               'status' => [
-                                   'statusCategory' => [
-                                       'name' => 'To Do'
-                                   ]
-                               ],
+                                'status' => [
+                                    'name' => 'To Do',
+                                ],
 
-                                   'summary' => 'een iets minder cool test issue'
-                               ,
+                                'summary' => 'een iets minder cool test issue'
+                                ,
 
-                                   'assignee' => [
-                                       'name' => 'Jefke'
+                                'assignee' => [
+                                    'name' => 'Jefke'
+                                ],
+                                'customfield_11001' => '',
+                                'issuetype' => [
+                                    'name' => 'bug'
+                                ]
 
-                               ]
                             ]
                         ]
 
-                    ]
+
                 ]
-        ];
+        ]];
 
         $this->mapper = new Mapper($this->sprintArray);
     }
