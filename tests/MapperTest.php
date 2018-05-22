@@ -102,5 +102,4 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('Jefke', $issue2->getAssignee());
 
     }
-
 }
