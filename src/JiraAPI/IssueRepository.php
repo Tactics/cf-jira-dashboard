@@ -103,4 +103,15 @@ class IssueRepository
         return $this->issues;
     }
 
+    public function getDoneIssueLinks()
+    {
+        $doneIssues = $this->getDoneIssues();
+        $links = [];
+        foreach ($doneIssues as $issue)
+        {
+            array_push($links, $issue->getLink());
+        }
+        return $links;
+    }
+
 }

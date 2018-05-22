@@ -8,8 +8,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use JiraAPI\Mapper;
 use JiraAPI\IssueRepository;
 use JiraAPI\Jira;
-//Request::setTrustedProxies(array('127.0.0.1'));
 
+//Request::setTrustedProxies(array('127.0.0.1'));
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html.twig', array());
 })
@@ -24,13 +24,30 @@ $app->get('/dashboard', function () use ($app) {
     $sprint = $jira->getSprint();
     /** @var IssueRepository $issues */
     $issues = $jira->getIssues();
+    $doneIssues = $jira->getDoneIssues();
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,
         'issues' => $issues,
+        'doneIssues' => $doneIssues
     ));
 
 });
+
+$app->get('/maildone', function () use ($app) {
+    $jira = new Jira();
+    $doneIssues = $jira->getDoneIssueLinks();
+
+        $message = (new Swift_Message('Link of da donez'))
+            ->setFrom(array('stijn.deridder@tactics.be'))
+            ->setTo(array('deridder.stijn93@gmail.com'))
+            ->setBody('kijk, ne mail!');
+
+        $app['mailer']->send($message);
+
+
+    return 'Matieu zijn nieuw haar';
+})->bind('maildone');
 
 $app->error(function (\Exception $e, Request $request, $code) use ($app) {
     if ($app['debug']) {

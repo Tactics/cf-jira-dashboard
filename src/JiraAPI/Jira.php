@@ -20,6 +20,12 @@ class Jira implements BacklogApi
         return new IssueRepository($issues);
     }
 
+    public function getDoneIssueLinks(): array
+    {
+        $issues = $this->getIssues();
+        return $issues->getDoneIssueLinks();
+    }
+
     /*If you have a url and your php supports it, you could just call file_get_contents:
 
     $response = file_get_contents('http://example.com/path/to/api/call?param1=5');

@@ -36,8 +36,9 @@ class Mapper
             $statkey = $issue['fields']['status']['statusCategory']['key'];
             $stateName = $issue['fields']['status']['name'];
             $customfields = $issue['fields']['customfield_11001'];
+            $issuetype = $issue['fields']['issuetype']['name'];
 
-            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $stateName, $customfields));
+            array_push($this->issues, new Issue($id, $key, $link, $shortInfo, $assignee,$status, $statkey, $stateName, $issuetype, $customfields));
         }
         asort($this->issues);
     }
