@@ -1,9 +1,38 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-    <form>
-        Search: <input type="text" class="search" data-target="issue-name"> <i class="fas fa-search"></i>
-    </form>
+<div class="row">
+    <div class="col-md-3">
+        Search on key: <input type="text" class="search" data-target="issue-name"> <i class="fas fa-search"></i>
+    </div>
+    <div class="col-md-3">
+        Search on key: <input type="text" class="search" data-target="issue-notname"> <i class="fas fa-search"></i>
+    </div>
+    <div class="col-md-3">
+        Search on type:
+        <select class="search" data-target="issue-type">
+            <option value="All">All</option>
+            <option value="Bug">Bug</option>
+            <option value="Improvement">Improvement</option>
+            <option value="Task">Task</option>
+            <option value="New Feature">New feature</option>
+            <option value="Sub-task">Sub-task</option>
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        Search on Status:
+        <select class="search" data-target="issue-status">
+            <option value="All">All</option>
+            <option value="Reopened">To do/ Reopened</option>
+            <option value="In Progress">In progress</option>
+            <option value="Review">Waiting for validation</option>
+            <option value="Resolved">Done</option>
+            <option value="Closed">In production</option>
+        </select>
+    </div>
+</div>
+
     <a href="{{ app.url_generator.generate('maildone') }}">mail done</a>
     <div class="row">
         <div class="col-md-1"></div>
@@ -57,7 +86,12 @@
             <div class="col-md-2">
                 <a href="{{ issue.link }}" class="issue-name" target="_blank">{{ issue.key }}</a>
                 </br>
-                {{ issue.type }}
+                <div class="issue-type">
+                    {{ issue.type }}
+                </div>
+                <div class="issue-status">
+                    {{ issue.stateName }}
+                </div>
                 </br>
                 <input type="button" class="undo" name="{{ issue.link }}" value="Add to mail">
             </div>
