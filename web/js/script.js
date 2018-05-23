@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    
+
     $('.search').on('keyup', function () {
         var searchTerm = $(this).val();
         $('.issue-name').each(function(index, searchableElement){
