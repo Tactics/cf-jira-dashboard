@@ -1,7 +1,19 @@
 $(document).ready(function(){
-
-    $('input#search').quicksearch('div.row');
-
+    
+    $('.search').on('keyup', function () {
+        var searchTerm = $(this).val();
+        $('.issue-name').each(function(index, searchableElement){
+            var searchableValue = $(searchableElement).text();
+            if(searchableValue.search(searchTerm) === -1 )
+            {
+                $(searchableElement).closest('.row').hide();
+            }
+            else
+            {
+                $(searchableElement).closest('.row').show();
+            }
+        })
+    })
 
 
     console.log('amma chargin mah laser!');
