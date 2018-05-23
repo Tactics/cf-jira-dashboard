@@ -1,64 +1,37 @@
 $(document).ready(function(){
+    applyFilters();
+    //wanneer een item met klasse "search" changed wordt of er in een invoerveld wordt getypt
+    $('.search').on('change keyup', applyFilters);
 
-    $('.search').on('keyup', function () {
-        var searchTerm = $(this).val();
-        console.log('data:' , $(this).data('target'));
 
-        $('.' + $(this).data('target')).each(function(index, searchableElement){
-            var searchableValue = $(searchableElement).text();
-            if(searchableValue.search(searchTerm) === -1 )
-            {
+
+});
+
+function applyFilters() {
+    //toon alle rows die mogelijk nog hidden staan
+    $('.row').show();
+    //voor elk element van de searchlass
+    $('.search').each(function(index, filterElement) {
+        //voor elke instantie van search haal je de filtervalue op
+        //let: scoped naar de dichtsbeizijnde enclosing blok, wat kleiner kan zijn dan een function block
+        //var: scpoped tot de dichtsbeizijnde  functie blok
+        let filterValue = $(filterElement).val();
+        //als de currfent filtervalue niet bestaat of leeg is(bv op All staat) ga naar het volende element
+        if(!filterValue || filterValue === '' ) {
+            return;
+        }
+        //haal van je current element de target op (zodat je weet op welke value je moet gaan zoeken)
+        //foreach alle divs die deze target als class hebben
+        $('.' + $(filterElement).data('target')).each(function(index, searchableElement){
+            //searchablevalue is de text waarde van het element dat je gaat vergelijken met de filter
+            let searchableValue = $(searchableElement).text();
+            //maak een regularexpression om lowercase te kunnen matchen
+            let re = new RegExp($(filterElement).val(), 'i');
+            //Als de filter niet matcht met de text van het element
+            if(!searchableValue.match(re)) {
+                //hide het element
                 $(searchableElement).closest('.row').hide();
-            }
-            else
-            {
-                $(searchableElement).closest('.row').show();
             }
         });
     });
-
-    $('.search').change(function(){
-        var searchTerm = $(this).val();
-        $('.' + $(this).data('target')).each(function(index, searchableElement){
-            var searchableValue = $(searchableElement).text();
-            if(searchTerm === 'Reopened')
-            {
-                console.log(searchableValue);
-                if(!(searchableValue.search(searchTerm) === -1) || !(searchableValue.search('Open') == -1))
-                {
-                    $(searchableElement).closest('.row').show();
-                }
-                else
-                {
-                    $(searchableElement).closest('.row').hide();
-                }
-            }
-            else if(searchTerm ==='All' || !(searchableValue.search(searchTerm) === -1))
-            {
-                $(searchableElement).closest('.row').show();
-            }
-            else
-            {
-                $(searchableElement).closest('.row').hide();
-            }
-        })
-    });
-
-
-    console.log('amma chargin mah laser!');
-    var $linkArray = [];
-
-    $('.addToMail').on("click", function(){
-        var name = $(this).attr("name");
-        $(this).val('Undo add to mail');
-        $(this).addClass('undo').removeClass('addToMail');
-        $linkArray.push(name);
-        console.log('the laser has been charged with' + name);
-        console.log($linkArray);
-    });
-
-    $('.undo').on("click", function(){
-        console.log("you've done it now, the laser fired!");
-    });
-
-});
+}

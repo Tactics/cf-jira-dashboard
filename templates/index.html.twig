@@ -1,37 +1,42 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-<div class="row">
-    <div class="col-md-3">
-        Search on key: <input type="text" class="search" data-target="issue-name"> <i class="fas fa-search"></i>
+<div id="container">
+    <div class="row">
+        <div id="title">
+            <h2>Jira Dashboard</h2>
+        </div>
     </div>
-    <div class="col-md-3">
-        Search on key: <input type="text" class="search" data-target="issue-notname"> <i class="fas fa-search"></i>
-    </div>
-    <div class="col-md-3">
-        Search on type:
-        <select class="search" data-target="issue-type">
-            <option value="All">All</option>
-            <option value="Bug">Bug</option>
-            <option value="Improvement">Improvement</option>
-            <option value="Task">Task</option>
-            <option value="New Feature">New feature</option>
-            <option value="Sub-task">Sub-task</option>
-        </select>
-    </div>
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-3">
+            Search on key: <input title="filter-issue-name" type="text" class="search" data-target="issue-name"> <i class="fas fa-search"></i>
+        </div>
+        <div class="col-md-3">
+            Search on type:
+            <select title="filter-issue-type" class="search" data-target="issue-type">
+                <option value="">All</option>
+                <option selected value="Bug">Bug</option>
+                <option value="Improvement">Improvement</option>
+                <option value="Task">Task</option>
+                <option value="New Feature">New feature</option>
+                <option value="Sub-task">Sub-task</option>
+            </select>
+        </div>
 
-    <div class="col-md-3">
-        Search on Status:
-        <select class="search" data-target="issue-status">
-            <option value="All">All</option>
-            <option value="Reopened">To do/ Reopened</option>
-            <option value="In Progress">In progress</option>
-            <option value="Review">Waiting for validation</option>
-            <option value="Resolved">Done</option>
-            <option value="Closed">In production</option>
-        </select>
+        <div class="col-md-3">
+            Search on Status:
+            <select title="filter-issue-status" class="search" data-target="issue-status">
+                <option value="">All</option>
+                <option value="Open">To do/ Reopened</option>
+                <option value="In Progress">In progress</option>
+                <option value="Review">Waiting for validation</option>
+                <option value="Resolved">Done</option>
+                <option value="Closed">In production</option>
+            </select>
+        </div>
     </div>
-</div>
 
     <a href="{{ app.url_generator.generate('maildone') }}">mail done</a>
     <div class="row">
@@ -78,21 +83,21 @@
         </div>
 
     </div>
-    </br>
+    <br>
     {% for issue in issues.issues %}
         <div class="row border">
         <hr>
 
             <div class="col-md-2">
                 <a href="{{ issue.link }}" class="issue-name" target="_blank">{{ issue.key }}</a>
-                </br>
+                <br>
                 <div class="issue-type">
                     {{ issue.type }}
                 </div>
                 <div class="issue-status">
                     {{ issue.stateName }}
                 </div>
-                </br>
+                <br>
                 <input type="button" class="undo" name="{{ issue.link }}" value="Add to mail">
             </div>
             {% for customfield in issue.customfields %}
@@ -105,11 +110,11 @@
                     {% endif %}
                 </div>
                 {% if loop.index % 5 == 0 %}
-                    </br></br><div class="col-md-2"></div>
+                    <br><br><div class="col-md-2"></div>
                 {% endif %}
             {% endfor %}
         </div>
-
+</div>
 
     {% endfor %}
 {% endblock %}
