@@ -3,15 +3,18 @@ body {
 }
 
 .customfields {
-    height: 150px;
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+    z-index: -5;
 }
 
 .issueBlock {
     height: 150px;
     vertical-align: middle;
     position: relative;
-    top: 40%;
+    top: 50%;
     transform: translateY(-50%);
+    text-align: center;
 }
 
 .issues {
@@ -22,13 +25,15 @@ body {
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     font-size: 1.2em;
+    z-index: 999999;
 }
 
 .customDone{
     visibility: hidden;
 }
 .issue-link{
-    visibility: hidden;
+    display: none;
+    z-index: -5;
 }
 
 #title h2 {
@@ -37,25 +42,35 @@ body {
     vertical-align:middle;
 }
 
+.issue-type{
+    height: 50px;
+    line-height: 50px;
+}
+
 .bug {
     background-color: #d6192c;
     color: white;
     text-align: center;
+    text-shadow: 1px 1px #3e080d;
 }
 .improvement {
     background-color: #1bb534;
     color: white;
     text-align: center;
+    text-shadow: 1px 1px #08390f;
+
 }
 .task {
     background-color: #1c8faf;
     color: white;
     text-align: center;
+    text-shadow: 1px 1px #0b3844;
 }
 
 .new-feature {
     background-color: #00530f;
     color: white;
     text-align: center;
+    text-shadow: 1px 1px #0f2904;
 }
 
