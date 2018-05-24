@@ -79,27 +79,4 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('485', $sprint->getId());
 
     }
-
-    /**
-     * @test
-     */
-    public function mapper_can_make_multiple_issues_from_the_sprint_array()
-    {
-        $issue1 = $this->mapper->getIssueById(30);
-        $issue2 = $this->mapper->getIssueById(40);
-
-        /** @var \JiraAPI\Issue $issue1  */
-        $this->assertEquals(30, $issue1->getId());
-        $this->assertEquals('Testissue-255', $issue1->getKey());
-        $this->assertEquals('een heel cool test issue', $issue1->getShortInfo());
-        $this->assertEquals('Waiting for validation', $issue1->getStatus());
-        $this->assertEquals('Joske', $issue1->getAssignee());
-
-        $this->assertEquals(40, $issue2->getId());
-        $this->assertEquals('Testissue-256', $issue2->getKey());
-        $this->assertEquals('een iets minder cool test issue', $issue2->getShortInfo());
-        $this->assertEquals('To Do', $issue2->getStatus());
-        $this->assertEquals('Jefke', $issue2->getAssignee());
-
-    }
 }

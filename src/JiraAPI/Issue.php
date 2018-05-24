@@ -30,17 +30,20 @@ class Issue
 
     public function allDoneCustomFieldsChecked()
     {
+        if ($this->customfields === ""){
+            return false;
+        }
         $ar = [];
         foreach ($this->customfields as $customfield => $val) {
             $ar[$val['id']] = [$val['checked'], $val['name']];
         }
         //als alle vakjes zijn aangevinkt die aangevinkt moeten zijn om proper in done te staan, return true (voor filter op template)
-        if ($ar['10200'][0] && $ar['10201'][0] && $ar['10211'][0] && $ar['10202'][0] && $ar['10210'][0] && $ar['10203'][0] && $ar['10204'][0] && $ar['10205'][0]
+        if (isset($ar['10200']) && $ar['10200'][0] && $ar['10201'][0] && $ar['10211'][0] && $ar['10202'][0] && $ar['10210'][0] && $ar['10203'][0] && $ar['10204'][0] && $ar['10205'][0]
             && $ar['10213'][0] && $ar['10209'][0] && $ar['10207'][0] && $ar['10206'][0] && $ar['10300'][0]) {
             return true;
-        } else {
-            return false;
         }
+        return false;
+
     }
 
     public function getStateName()
