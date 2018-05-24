@@ -24,14 +24,11 @@ $app->get('/dashboard', function () use ($app) {
     $sprint = $jira->getSprint();
     /** @var IssueRepository $issues */
     $issues = $jira->getIssues();
-    $doneIssues = $jira->getDoneIssueLinks();
 
     return $app['twig']->render('index.html.twig', array(
         'sprint' => $sprint,
         'issues' => $issues,
-        'doneIssues' => $doneIssues
     ));
-
 });
 
 $app->get('/maildone', function () use ($app) {
@@ -44,7 +41,6 @@ $app->get('/maildone', function () use ($app) {
             ->setBody('kijk, ne mail!');
 
         $app['mailer']->send($message);
-
 
     return 'Matieu zijn nieuw haar';
 })->bind('maildone');

@@ -1,12 +1,15 @@
 $(document).ready(function(){
-    applyFilters();
+    initFilters();
     //wanneer een item met klasse "search" changed wordt of er in een invoerveld wordt getypt
     $('.search').on('change keyup', applyFilters);
 
 
 
 });
-
+function initFilters(){
+    applyFilters();
+    pletsenFilter();
+}
 function applyFilters() {
     //toon alle rows die mogelijk nog hidden staan
     $('.row').show();
@@ -33,5 +36,15 @@ function applyFilters() {
                 $(searchableElement).closest('.row').hide();
             }
         });
+    });
+}
+
+function pletsenFilter(){
+    $('.issues').each(function(index, issue){
+        let allForDoneChecked = $(this).find('.customDone').text()
+        let issueState = $(this).find('.issue-status').text();
+        if (issueState === 'Resolved' || issueState === 'Closed' && !issueState ){
+            $(this).css('background-color', '#f47a42');
+        }
     });
 }

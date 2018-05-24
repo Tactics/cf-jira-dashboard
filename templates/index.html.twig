@@ -17,7 +17,7 @@
             Search on type:
             <select title="filter-issue-type" class="search" data-target="issue-type">
                 <option value="">All</option>
-                <option selected value="Bug">Bug</option>
+                <option value="Bug">Bug</option>
                 <option value="Improvement">Improvement</option>
                 <option value="Task">Task</option>
                 <option value="New Feature">New feature</option>
@@ -85,23 +85,20 @@
     </div>
     <br>
     {% for issue in issues.issues %}
-        <div class="row border">
+        <div class="row border issues">
         <hr>
 
             <div class="col-md-2">
                 <a href="{{ issue.link }}" class="issue-name" target="_blank">{{ issue.key }}</a>
                 <br>
-                <div class="issue-type">
-                    {{ issue.type }}
-                </div>
-                <div class="issue-status">
-                    {{ issue.stateName }}
-                </div>
+                <div class="issue-type">{{ issue.type }}</div>
+                <div class="issue-status">{{ issue.stateName }}</div>
+                <div class="customDone">{{ issue.customfieldsDoneChecked }}</div>
                 <br>
                 <input type="button" class="undo" name="{{ issue.link }}" value="Add to mail">
             </div>
             {% for customfield in issue.customfields %}
-                <div class="col-md-2">
+                <div class="col-md-2 customfields">
                     {{ customfield['name'] }}
                     {% if customfield.checked %}
                         <i class="far fa-check-square"></i>

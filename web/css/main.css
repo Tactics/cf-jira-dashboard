@@ -1,3 +1,13 @@
 .border{
     border-style: solid;
 }
+
+.customDone{
+    visibility: hidden;
+}
+
+#title h2 {
+    margin-left:25px;
+    line-height:51px;
+    vertical-align:middle;
+}
