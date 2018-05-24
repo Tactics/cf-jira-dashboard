@@ -5,6 +5,9 @@
 .customDone{
     visibility: hidden;
 }
+.issue-link{
+    visibility: hidden;
+}
 
 #title h2 {
     margin-left:25px;

@@ -53,3 +53,29 @@ function pletsenFilter() {
         }
     });
 }
+
+function copyToClipboard () {
+    // Create a new textarea element and give it id='temp_element'
+    var textarea = document.createElement('textarea');
+    textarea.id = 'temp_element';
+    // Optional step to make less noise on the page, if any!
+    textarea.style.height = 0
+    // Now append it to your page somewhere, I chose <body>
+    document.body.appendChild(textarea);
+    // Give our textarea a value of whatever inside the div of id=containerid
+    $('.issues').each(function(index, issue){
+        if(($(this).find('.issue-status').text()) === 'Resolved') {
+            var link = $(this).find('.issue-link').text();
+            var key = $(this).find('.issue-name').text();
+            textarea.value += key + ": " + link + '\n';
+        }
+    });
+    //textarea.value = document.getElementsByClassName('issues').innerHTML;
+    // Now copy whatever inside the textarea to clipboard
+    var selector = document.querySelector('#temp_element');
+    selector.select();
+    document.execCommand('copy');
+    // Remove the textarea
+    document.body.removeChild(textarea);
+    alert("copied done's to clipbaord");
+}

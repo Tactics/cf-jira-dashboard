@@ -87,11 +87,19 @@
 
     </div>
     <br>
+    <div class="row">
+        <div class="col-md-2">
+        </div>
+        <div class="col-md-2">
+            <input id="clickMe" type="button" value="Copy Done's to clipboard" onclick="copyToClipboard();" />
+        </div>
+    </div>
     {% for issue in issues.issues %}
         <div class="row border issues">
         <hr>
 
             <div class="col-md-2">
+                <div class="issue-link">{{ issue.link }}</div>
                 <a href="{{ issue.link }}" class="issue-name" target="_blank">{{ issue.key }}</a>
                 <br>
                 <div class="issue-type">{{ issue.type }}</div>
