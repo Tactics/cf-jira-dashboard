@@ -2,7 +2,7 @@ $(document).ready(function(){
     initFilters();
     //wanneer een item met klasse "search" changed wordt of er in een invoerveld wordt getypt
     $('.search').on('change keyup', applyFilters);
-
+    $('.filterPlets').on('change', pletsenFilter);
 
 
 });
@@ -10,9 +10,11 @@ function initFilters(){
     applyFilters();
     pletsenFilter();
 }
+
 function applyFilters() {
     //toon alle rows die mogelijk nog hidden staan
     $('.row').show();
+    pletsenFilter();
     //voor elk element van de searchlass
     $('.search').each(function(index, filterElement) {
         //voor elke instantie van search haal je de filtervalue op
@@ -39,12 +41,16 @@ function applyFilters() {
     });
 }
 
-function pletsenFilter(){
-    $('.issues').each(function(index, issue){
+function pletsenFilter() {
+    $('.issues').each(function (index, issue) {
         let allForDoneChecked = $(this).find('.customDone').text()
         let issueState = $(this).find('.issue-status').text();
-        if (issueState === 'Resolved' || issueState === 'Closed' && !issueState ){
+        if ((issueState === 'Resolved' || issueState === 'Closed') && !allForDoneChecked) {
             $(this).css('background-color', '#f47a42');
+            return;
+        }
+        if($('.filterPlets').prop('checked')) {
+            $(this).hide();
         }
     });
 }

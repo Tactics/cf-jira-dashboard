@@ -36,6 +36,9 @@
                 <option value="Closed">In production</option>
             </select>
         </div>
+        <div class="col-md-2">
+            Pletsenfilter:<input type="checkbox" label="pletsenfilter" class="filterPlets" value="filter">
+        </div>
     </div>
 
     <a href="{{ app.url_generator.generate('maildone') }}">mail done</a>
@@ -94,6 +97,7 @@
                 <div class="issue-type">{{ issue.type }}</div>
                 <div class="issue-status">{{ issue.stateName }}</div>
                 <div class="customDone">{{ issue.customfieldsDoneChecked }}</div>
+                <div>{{ issue.assignee }}</div>
                 <br>
                 <input type="button" class="undo" name="{{ issue.link }}" value="Add to mail">
             </div>
