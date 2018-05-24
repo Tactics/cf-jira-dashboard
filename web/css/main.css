@@ -3,9 +3,19 @@ body {
 }
 
 .customfields {
-    border-bottom: 1px solid lightgrey;
-    border-top: 1px solid lightgrey;
-    z-index: -5;
+    height: 100px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: all .2s ease;
+}
+
+.col-md-2 {
+    float: right;
+    
+}
+
+.row:hover {
+    background-color: lightgrey;
 }
 
 .issueBlock {
@@ -15,6 +25,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     text-align: center;
+
 }
 
 .issues {
@@ -26,6 +37,13 @@ body {
     font-weight: 400;
     font-size: 1.2em;
     z-index: 999999;
+    padding: 5px;
+    margin: 5px;
+    transition: all .5s ease;
+}
+
+.issue-name:hover {
+    font-size: 1.3em;
 }
 
 .customDone{

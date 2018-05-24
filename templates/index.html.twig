@@ -1,7 +1,7 @@
 {% extends "layout.html.twig" %}
 
 {% block content %}
-<div id="container">
+    <div id="container">
     <div class="row">
         <div id="title">
             <h2>Jira Dashboard</h2>
@@ -11,7 +11,8 @@
         <div class="col-md-1">
         </div>
         <div class="col-md-3">
-            Search on key: <input title="filter-issue-name" type="text" class="search" data-target="issue-name"> <i class="fas fa-search"></i>
+            Search on key: <input title="filter-issue-name" type="text" class="search" data-target="issue-name"> <i
+                    class="fas fa-search"></i>
         </div>
         <div class="col-md-3">
             Search on type:
@@ -91,19 +92,19 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-2">
-            <input id="clickMe" type="button" value="Copy Done's to clipboard" onclick="copyToClipboard();" />
+            <input id="clickMe" type="button" value="Copy Done's to clipboard" onclick="copyToClipboard();"/>
         </div>
     </div>
     {% for issue in issues.issues %}
         <div class="row border issues">
-        <hr>
+            <hr>
 
             <div class="col-md-2 issueBlock">
-        <div class="issue-type
-                {% if issue.type=="Bug"%} bug {% endif %}
-                {% if issue.type=="Improvement"%} improvement {% endif %}
-                {% if issue.type=="Task"%} improvement {% endif %}
-                {% if issue.type=="New Feature"%} new-feature {% endif %}
+                <div class="issue-type
+                {% if issue.type=="Bug" %} bug {% endif %}
+                {% if issue.type=="Improvement" %} improvement {% endif %}
+                {% if issue.type=="Task" %} improvement {% endif %}
+                {% if issue.type=="New Feature" %} new-feature {% endif %}
 
                 ">{{ issue.type }}</div>
                 <div class="issue-link">{{ issue.link }}</div>
@@ -115,6 +116,7 @@
                 <div>{{ issue.assignee }}</div>
                 <br>
             </div>
+            <div class="col-md-10" >
             {% for customfield in issue.customfields %}
                 <div class="col-md-2 customfields">
                     {{ customfield['name'] }}
@@ -125,11 +127,12 @@
                     {% endif %}
                 </div>
                 {% if loop.index % 5 == 0 %}
-                    <br><br><div class="col-md-2"></div>
+                    <div class="clearfix"></div>
                 {% endif %}
             {% endfor %}
+            </div>
         </div>
-</div>
+        </div>
 
     {% endfor %}
 {% endblock %}
