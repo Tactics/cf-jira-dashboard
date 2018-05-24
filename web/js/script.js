@@ -1,20 +1,19 @@
 $(document).ready(function(){
-    initFilters();
+    filter();
     //wanneer een item met klasse "search" changed wordt of er in een invoerveld wordt getypt
-    $('.search').on('change keyup', applyFilters);
-    $('.filterPlets').on('change', pletsenFilter);
+    $('.search').on('change keyup', filter);
+    $('.filterPlets').on('change', filter);
 
 
 });
-function initFilters(){
-    applyFilters();
+function filter(){
+    generalFilters();
     pletsenFilter();
 }
 
-function applyFilters() {
+function generalFilters() {
     //toon alle rows die mogelijk nog hidden staan
     $('.row').show();
-    pletsenFilter();
     //voor elk element van de searchlass
     $('.search').each(function(index, filterElement) {
         //voor elke instantie van search haal je de filtervalue op
