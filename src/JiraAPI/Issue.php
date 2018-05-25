@@ -9,7 +9,6 @@ class Issue
     private $shortInfo;
     private $link;
     private $assignee;
-    private $status;
     private $stateName;
     private $type;
     private $customfields;

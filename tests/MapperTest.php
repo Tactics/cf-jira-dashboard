@@ -39,7 +39,7 @@ class MapperTest extends \PHPUnit\Framework\TestCase
 
                         [
                             'key' => 'Testissue-256',
-                            'id' => 30,
+                            'id' => 40,
                             'fields' => [
                                 'status' => [
                                     'name' => 'To Do',
@@ -77,6 +77,28 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('SPRINT 16-4', $sprint->getName());
         $this->assertEquals('the moon', $sprint->getGoal());
         $this->assertEquals('485', $sprint->getId());
+
+    }
+
+    /**
+     * @test
+     */
+    public function mapper_can_make_multiple_issues_from_the_sprint_array()
+    {
+        $issues = $this->mapper->getIssues();
+
+        /** @var \JiraAPI\Issue $issue1  */
+        $this->assertEquals(30, $issues[0]->getId());
+        $this->assertEquals('Testissue-255', $issues[0]->getKey());
+        $this->assertEquals('een heel cool test issue', $issues[0]->getShortInfo());
+        $this->assertEquals('Waiting for validation', $issues[0]->getStatename());
+        $this->assertEquals('Joske', $issues[0]->getAssignee());
+
+        $this->assertEquals(40, $issues[1]->getId());
+        $this->assertEquals('Testissue-256', $issues[1]->getKey());
+        $this->assertEquals('een iets minder cool test issue', $issues[1]->getShortInfo());
+        $this->assertEquals('To Do', $issues[1]->getStatename());
+        $this->assertEquals('Jefke', $issues[1]->getAssignee());
 
     }
 }
