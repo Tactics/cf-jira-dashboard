@@ -1,4 +1,6 @@
 /vendor/
+secrets/*
+!secrets/secrets.dist.php
 
 .idea/
 .env/
