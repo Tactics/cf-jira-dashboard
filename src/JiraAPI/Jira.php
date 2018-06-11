@@ -26,10 +26,10 @@ class Jira implements BacklogApi
         return $issues->getDoneIssueLinks();
     }
 
-    /*If you have a url and your php supports it, you could just call file_get_contents:
+    /*If you have a url and your dashboard supports it, you could just call file_get_contents:
 
     $response = file_get_contents('http://example.com/path/to/api/call?param1=5');
-    if $response is JSON, use json_decode to turn it into php array:
+    if $response is JSON, use json_decode to turn it into dashboard array:
 
     $response = json_decode($response);
     if $response is XML, use simple_xml class:

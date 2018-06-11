@@ -4,7 +4,7 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.1",
         "silex/silex": "~2.0",
         "silex/web-profiler": "~2.0",
         "symfony/asset": "~2.8|^3.0",
@@ -37,8 +37,7 @@
     },
     "scripts": {
         "run": [
-            "echo 'Started web server on http://localhost:8888'",
-            "php -S localhost:8888 -t web"
+
         ]
     },
     "require-dev": {

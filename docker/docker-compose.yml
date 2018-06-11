@@ -1,0 +1,27 @@
+version: "3.6"
+
+services:
+    webserver:
+      build:
+        context: webserver
+        dockerfile: Dockerfile
+      links:
+       - dashboard
+      volumes:
+       - ..:/var/www
+       - ./webserver/upstream.conf:/etc/nginx/conf.d/upstream.conf
+      ports:
+       - "80:80"
+
+    dashboard:
+      build:
+        context: ..
+        dockerfile: docker/dashboard/Dockerfile
+      expose:
+       -  "9000"
+      volumes:
+       - ..:/var/www
+      environment:
+#       servername zetten zodat phpstorm deze kan gebruiken om onze server config te matchen en de filemapping kan vinden van waar onze files lokaal staan
+        PHP_IDE_CONFIG: "serverName=local.clearfacts.be"
+      entrypoint: /tools/run.phpfpm.locally.sh
