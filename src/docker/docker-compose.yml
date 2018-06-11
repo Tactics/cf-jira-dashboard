@@ -1,0 +1,14 @@
+version: "3.6"
+
+services:
+    php:
+      build:
+        context: ../..
+        dockerfile: src/docker/DockerFile
+      expose:
+       -  "9000"
+      volumes:
+       - ../..:/var/www
+      environment:
+#       servername zetten zodat phpstorm deze kan gebruiken om onze server config te matchen en de filemapping kan vinden van waar onze files lokaal staan
+        PHP_IDE_CONFIG: "serverName=local.jira.clearfacts.be"
