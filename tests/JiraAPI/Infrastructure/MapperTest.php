@@ -1,9 +1,15 @@
 <?php
+declare(strict_types=1);
 
-namespace JiraAPI\Infrastructure;
+namespace tests\JiraAPI\Infrastructure;
+
+use JiraAPI\Infrastructure\Helper\Mapper;
 
 class MapperTest extends \PHPUnit\Framework\TestCase
 {
+    /**
+     * @var Mapper
+     */
     private $mapper;
     private $sprintArray = [];
 
@@ -73,7 +79,6 @@ class MapperTest extends \PHPUnit\Framework\TestCase
      */
     public function mapper_can_make_a_new_sprint_from_the_sprint_array()
     {
-        /** @var \JiraAPI\Sprint $sprint */
         $sprint = $this->mapper->getSprint();
 
         $this->assertEquals('SPRINT 16-4', $sprint->getName());
@@ -90,7 +95,6 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $issue1 = $this->mapper->getIssueById(30);
         $issue2 = $this->mapper->getIssueById(40);
 
-        /** @var \JiraAPI\Issue $issue1 */
         $this->assertEquals(30, $issue1->getId());
         $this->assertEquals('Testissue-255', $issue1->getKey());
         $this->assertEquals('een heel cool test issue', $issue1->getShortInfo());

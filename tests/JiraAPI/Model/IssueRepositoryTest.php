@@ -1,7 +1,10 @@
 <?php
+declare(strict_types=1);
 
-use JiraAPI\IssueRepository;
-use JiraAPI\Issue;
+namespace tests\JiraAPI\Model;
+
+use JiraAPI\Model\Data\IssueRepository;
+use JiraAPI\Model\Entity\Issue;
 
 class IssueRepositoryTest extends \PHPUnit\Framework\TestCase
 {
