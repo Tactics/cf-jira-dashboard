@@ -2,12 +2,7 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use JiraAPI\Mapper;
-use JiraAPI\IssueRepository;
-use JiraAPI\Jira;
+use JiraAPI\Model\Business\Jira;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 $app->get('/', function () use ($app) {
@@ -20,9 +15,7 @@ $app->get('/dashboard', function () use ($app) {
 
     $jira = new Jira();
 
-    /** @var \JiraAPI\Sprint $sprint */
     $sprint = $jira->getSprint();
-    /** @var IssueRepository $issues */
     $issues = $jira->getIssues();
 
     return $app['twig']->render('index.html.twig', array(

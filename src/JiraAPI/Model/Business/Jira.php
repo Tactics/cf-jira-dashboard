@@ -40,6 +40,17 @@ class Jira implements BacklogApi
     private $mapper;
 
     /**
+     * Jira constructor.
+     */
+    public function __construct()
+    {
+        $config = require __DIR__ . '/../../secrets/secrets.php';
+        $this->username = $config['username'];
+        $this->password = $config['password'];
+        $this->getClearFactsSprint();
+    }
+
+    /**
      * @return Sprint
      */
     public function getSprint(): Sprint
@@ -64,17 +75,6 @@ class Jira implements BacklogApi
     {
         $issues = $this->getIssues();
         return $issues->getDoneIssueLinks();
-    }
-
-    /**
-     * Jira constructor.
-     */
-    public function __construct()
-    {
-        $config = require __DIR__ . '/../../secrets/secrets.php';
-        $this->username = $config['username'];
-        $this->password = $config['password'];
-        $this->getClearFactsSprint();
     }
 
     /**

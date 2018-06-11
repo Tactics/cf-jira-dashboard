@@ -17,7 +17,7 @@ class Issue
     const CLOSED = 'Closed';
 
     /**
-     * @var int
+     * @var string
      */
     private $id;
     /**
@@ -59,7 +59,7 @@ class Issue
 
     /**
      * Issue constructor.
-     * @param int $id
+     * @param string $id
      * @param string $key
      * @param string $link
      * @param string $shortInfo
@@ -68,7 +68,7 @@ class Issue
      * @param string $type
      * @param array $customfields
      */
-    public function __construct(int $id, string $key, string $link, string $shortInfo, string $assignee, string $stateName, string $type, array $customfields)
+    public function __construct(string $id, string $key, string $link, string $shortInfo, string $assignee = null, string $stateName, string $type, array $customfields)
     {
         $this->id = $id;
         $this->key = $key;
@@ -154,7 +154,7 @@ class Issue
     /**
      * @return string
      */
-    public function getAssignee(): string
+    public function getAssignee(): ?string
     {
         return $this->assignee;
     }

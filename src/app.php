@@ -1,11 +1,11 @@
 <?php
 
-use JiraAPI\Jira;
 use Silex\Application;
 use Silex\Provider\AssetServiceProvider;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\ServiceControllerServiceProvider;
 use Silex\Provider\HttpFragmentServiceProvider;
+use JiraAPI\Model\Business\Jira;
 
 $config = require __DIR__ . '/../secrets/secrets.php';
 
