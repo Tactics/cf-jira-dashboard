@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace JiraAPI;
+namespace JiraAPI\Model\Data;
+
+use JiraAPI\Model\Entity\Issue;
 
 /**
  * Class IssueRepository

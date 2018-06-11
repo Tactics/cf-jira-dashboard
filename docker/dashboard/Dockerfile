@@ -11,5 +11,3 @@ WORKDIR /var/www
 
 # Install PHP vendor libs
 RUN composer.phar install --no-ansi --no-interaction --no-progress --optimize-autoloader --profile --prefer-dist
-
-

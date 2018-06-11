@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace JiraAPI;
+namespace JiraAPI\Infrastructure\Helper;
+
+use JiraAPI\Model\Entity\Issue;
+use JiraAPI\Model\Entity\Sprint;
 
 /**
  * Class Mapper

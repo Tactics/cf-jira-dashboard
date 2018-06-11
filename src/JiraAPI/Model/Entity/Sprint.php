@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace JiraAPI;
+namespace JiraAPI\Model\Entity;
 
 /**
  * Class Sprint

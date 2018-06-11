@@ -1,9 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace JiraAPI;
+namespace JiraAPI\Model\Business;
 
 use GuzzleHttp\Client;
+use JiraAPI\Infrastructure\BacklogApi;
+use JiraAPI\Infrastructure\Helper\Mapper;
+use JiraAPI\Model\Data\IssueRepository;
+use JiraAPI\Model\Entity\Sprint;
 
 /**
  * Class Jira
