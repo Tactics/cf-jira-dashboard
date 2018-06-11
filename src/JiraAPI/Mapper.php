@@ -3,19 +3,40 @@ declare(strict_types=1);
 
 namespace JiraAPI;
 
+/**
+ * Class Mapper
+ * @package JiraAPI
+ */
 class Mapper
 {
-    private $sprintArray = [];
+    /**
+     * @var Sprint
+     */
     private $sprint;
+    /**
+     * @var array
+     */
+    private $sprintArray = [];
+    /**
+     * @var Issue[]
+     */
     private $issues = [];
-    public function __construct($sprintArray)
+
+    /**
+     * Mapper constructor.
+     * @param array $sprintArray
+     */
+    public function __construct(array $sprintArray)
     {
         $this->sprintArray = $sprintArray;
         $this->makeNewSprint();
         $this->makeNewIssues();
     }
 
-    private function makeNewSprint()
+    /**
+     * @return void
+     */
+    private function makeNewSprint(): void
     {
         $name = $this->sprintArray['sprintname'];
         $goal = $this->sprintArray['goal'];
@@ -23,10 +44,12 @@ class Mapper
         $this->sprint = new Sprint($id, $name, $goal);
     }
 
-    private function makeNewIssues()
+    /**
+     * @return void
+     */
+    private function makeNewIssues(): void
     {
-        foreach($this->sprintArray['issues']['issues'] as $issue)
-        {
+        foreach ($this->sprintArray['issues']['issues'] as $issue) {
             $id = $issue['id'];
             $key = $issue['key'];
             $link = 'http://jira.tactics.be:8080/browse/' . $key;
@@ -40,6 +63,9 @@ class Mapper
         asort($this->issues);
     }
 
+    /**
+     * @return Sprint
+     */
     public function getSprint(): Sprint
     {
         return $this->sprint;

@@ -1,21 +1,74 @@
 <?php
+declare(strict_types=1);
 
 namespace JiraAPI;
 
+/**
+ * Class Issue
+ * @package JiraAPI
+ */
 class Issue
 {
+    const OPEN = 'open';
+    const IN_PROGRESS = 'In Progress';
+    const REVIEW = 'Review';
+    const RESOLVED = 'Resolved';
+    const REOPENED = 'Reopened';
+    const CLOSED = 'Closed';
+
+    /**
+     * @var int
+     */
     private $id;
+    /**
+     * @var string
+     */
     private $key;
+    /**
+     * @var string
+     */
     private $shortInfo;
+    /**
+     * @var string
+     */
     private $link;
+    /**
+     * @var string
+     */
     private $assignee;
+    /**
+     * @var string
+     */
     private $status;
+    /**
+     * @var string
+     */
     private $stateName;
+    /**
+     * @var string
+     */
     private $type;
+    /**
+     * @var array
+     */
     private $customfields;
+    /**
+     * @var bool
+     */
     private $customfieldsDoneChecked;
 
-    public function __construct($id, $key, $link, $shortInfo, $assignee, $stateName, $type, $customfields)
+    /**
+     * Issue constructor.
+     * @param int $id
+     * @param string $key
+     * @param string $link
+     * @param string $shortInfo
+     * @param string $assignee
+     * @param string $stateName
+     * @param string $type
+     * @param array $customfields
+     */
+    public function __construct(int $id, string $key, string $link, string $shortInfo, string $assignee, string $stateName, string $type, array $customfields)
     {
         $this->id = $id;
         $this->key = $key;
@@ -28,7 +81,10 @@ class Issue
         $this->customfieldsDoneChecked = $this->allDoneCustomFieldsChecked();
     }
 
-    public function allDoneCustomFieldsChecked()
+    /**
+     * @return bool
+     */
+    public function allDoneCustomFieldsChecked(): bool
     {
         $ar = [];
         foreach ($this->customfields as $customfield => $val) {
@@ -43,76 +99,82 @@ class Issue
         }
     }
 
-    public function getStateName()
+    /**
+     * @return string
+     */
+    public function getStateName(): string
     {
         return $this->stateName;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getShortInfo()
+    public function getShortInfo(): string
     {
         return $this->shortInfo;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getStatus()
+    public function getStatus(): string
     {
         return $this->status;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getLink()
+    public function getLink(): string
     {
         return $this->link;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getAssignee()
+    public function getAssignee(): string
     {
         return $this->assignee;
     }
 
-    public function getCustomfields()
+    /**
+     * @return array
+     */
+    public function getCustomfields(): array
     {
         return $this->customfields;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
     }
 
     /**
-     * @return mixed
+     * @return bool
      */
-    public function getCustomfieldsDoneChecked():bool
+    public function getCustomfieldsDoneChecked(): bool
     {
         return $this->customfieldsDoneChecked;
     }
