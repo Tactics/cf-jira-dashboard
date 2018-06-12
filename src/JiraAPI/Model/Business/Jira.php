@@ -7,6 +7,7 @@ use GuzzleHttp\Client;
 use JiraAPI\Exception\JiraException;
 use JiraAPI\Infrastructure\BacklogApi;
 use JiraAPI\Infrastructure\Helper\Mapper;
+use JiraAPI\Model\Data\IssueCollection;
 use JiraAPI\Model\Entity\Issue;
 use JiraAPI\Model\Entity\Sprint;
 
@@ -50,19 +51,11 @@ class Jira implements BacklogApi
     }
 
     /**
-     * @return Issue[]
+     * @return IssueCollection
      */
     public function getIssues(): array
     {
         return $this->sprint->getIssueCollection();
-    }
-
-    /**
-     * @return array
-     */
-    public function getDoneIssueLinks(): array
-    {
-        return $this->sprint->getDoneIssueLinks();
     }
 
     /**
@@ -114,9 +107,10 @@ class Jira implements BacklogApi
                 'issues' => $issues
             ];
 
-            $mapper = new Mapper($sprint);
+            $mapper = new Mapper();
 
-            $this->sprint = $mapper->makeNewSprint();
+            $this->sprint = $mapper->mapsToSprintFromResponse($sprint);
+
         } catch (\Exception $exception) {
             throw new JiraException('We could not create a sprint');
         }

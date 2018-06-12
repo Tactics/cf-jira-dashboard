@@ -43,10 +43,6 @@ class Issue
     /**
      * @var string
      */
-    private $stateName;
-    /**
-     * @var string
-     */
     private $type;
     /**
      * @var array
@@ -64,18 +60,18 @@ class Issue
      * @param string $link
      * @param string $shortInfo
      * @param string $assignee
-     * @param string $stateName
+     * @param string $status
      * @param string $type
      * @param array $customfields
      */
-    public function __construct(string $id, string $key, string $link, string $shortInfo, string $assignee = null, string $stateName, string $type, array $customfields)
+    public function __construct(string $id, string $key, string $link, string $shortInfo, string $assignee = null, string $status, string $type, array $customfields)
     {
         $this->id = $id;
         $this->key = $key;
         $this->shortInfo = $shortInfo;
         $this->link = $link;
         $this->assignee = $assignee;
-        $this->stateName = $stateName;
+        $this->status = $status;
         $this->type = $type;
         $this->customfields = $customfields;
         $this->customfieldsDoneChecked = $this->allDoneCustomFieldsChecked();
@@ -101,14 +97,6 @@ class Issue
         } else {
             return false;
         }
-    }
-
-    /**
-     * @return string
-     */
-    public function getStateName(): string
-    {
-        return $this->stateName;
     }
 
     /**
@@ -194,10 +182,10 @@ class Issue
         $link = 'http://jira.tactics.be:8080/browse/' . $key;
         $shortInfo = $array['fields']['summary'];
         $assignee = $array['fields']['assignee']['name'];
-        $stateName = $array['fields']['status']['name'];
+        $status = $array['fields']['status']['name'];
         $issuetype = $array['fields']['issuetype']['name'];
         $customfields = $array['fields']['customfield_11001'];
 
-        return new Issue($id, $key, $link, $shortInfo, $assignee, $stateName, $issuetype, $customfields);
+        return new Issue($id, $key, $link, $shortInfo, $assignee, $status, $issuetype, $customfields);
     }
 }

@@ -50,7 +50,7 @@ class IssueCollection
     public function getOpenIssues(): array
     {
         return array_filter($this->issues, function (Issue $var) {
-            return ($var->getStateName() === Issue::OPEN) || ($var->getStateName() === Issue::REOPENED);
+            return ($var->getStatus() === Issue::OPEN) || ($var->getStatus() === Issue::REOPENED);
         });
     }
 
@@ -60,7 +60,7 @@ class IssueCollection
     public function getInProgressIssues(): array
     {
         return array_filter($this->issues, function (Issue $var) {
-            return ($var->getStateName() === Issue::IN_PROGRESS);
+            return ($var->getStatus() === Issue::IN_PROGRESS);
         });
     }
 
@@ -70,7 +70,7 @@ class IssueCollection
     public function getToReviewIssues(): array
     {
         return array_filter($this->issues, function (Issue $var) {
-            return ($var->getStateName() === Issue::REVIEW);
+            return ($var->getStatus() === Issue::REVIEW);
         });
     }
 
@@ -80,7 +80,7 @@ class IssueCollection
     public function getDoneIssues(): array
     {
         return array_filter($this->issues, function (Issue $var) {
-            return ($var->getStateName() === Issue::RESOLVED);
+            return ($var->getStatus() === Issue::RESOLVED);
         });
     }
 
@@ -90,7 +90,7 @@ class IssueCollection
     public function getClosedIssues(): array
     {
         return array_filter($this->issues, function (Issue $var) {
-            return ($var->getStateName() === Issue::CLOSED);
+            return ($var->getStatus() === Issue::CLOSED);
         });
     }
 

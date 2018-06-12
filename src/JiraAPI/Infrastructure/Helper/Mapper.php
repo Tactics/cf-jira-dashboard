@@ -13,41 +13,29 @@ use JiraAPI\Model\Entity\Sprint;
 class Mapper
 {
     /**
-     * @var array
-     */
-    private $sprintArray = [];
-
-    /**
-     * Mapper constructor.
-     * @param array $sprintArray
-     */
-    public function __construct(array $sprintArray)
-    {
-        $this->sprintArray = $sprintArray;
-    }
-
-    /**
+     * @param array $response
      * @return Sprint
      */
-    public function makeNewSprint(): Sprint
+    public function mapsToSprintFromResponse(array $response): Sprint
     {
-        $name = $this->sprintArray['sprintname'];
-        $goal = $this->sprintArray['goal'];
-        $id = $this->sprintArray['sprintId'];
+        $name = $response['sprintname'];
+        $goal = $response['goal'];
+        $id = $response['sprintId'];
         $sprint = new Sprint($id, $name, $goal);
 
-        $this->fillWithIssues($sprint);
+        $this->fillWithIssues($sprint, $response);
 
         return $sprint;
     }
 
     /**
      * @param Sprint $sprint
+     * @param array $response
      * @return void
      */
-    private function fillWithIssues(Sprint $sprint): void
+    private function fillWithIssues(Sprint $sprint, array $response): void
     {
-        foreach ($this->sprintArray['issues']['issues'] as $issue) {
+        foreach ($response['issues']['issues'] as $issue) {
             $issue = Issue::fromArray($issue);
             $sprint->addIssue($issue);
         }
