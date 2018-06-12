@@ -18,17 +18,17 @@ class DashboardAction implements Action
 
     /**
      * @return void
+     * @throws \JiraAPI\Exception\JiraException
      */
     public function execute(): void
     {
         $jira = new Jira();
 
         $sprint = $jira->getSprint();
-        $issues = $jira->getIssues();
 
         $this->response = [
             'sprint' => $sprint,
-            'issues' => $issues
+            'issueCollection' => $sprint->getIssueCollection()
         ];
     }
 

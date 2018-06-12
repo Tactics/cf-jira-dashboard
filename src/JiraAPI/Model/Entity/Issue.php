@@ -182,4 +182,22 @@ class Issue
     {
         return $this->customfieldsDoneChecked;
     }
+
+    /**
+     * @param array $array
+     * @return Issue
+     */
+    public static function fromArray(array $array): Issue
+    {
+        $id = $array['id'];
+        $key = $array['key'];
+        $link = 'http://jira.tactics.be:8080/browse/' . $key;
+        $shortInfo = $array['fields']['summary'];
+        $assignee = $array['fields']['assignee']['name'];
+        $stateName = $array['fields']['status']['name'];
+        $issuetype = $array['fields']['issuetype']['name'];
+        $customfields = $array['fields']['customfield_11001'];
+
+        return new Issue($id, $key, $link, $shortInfo, $assignee, $stateName, $issuetype, $customfields);
+    }
 }

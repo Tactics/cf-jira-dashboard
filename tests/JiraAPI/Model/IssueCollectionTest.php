@@ -3,10 +3,10 @@ declare(strict_types=1);
 
 namespace tests\JiraAPI\Model;
 
-use JiraAPI\Model\Data\IssueRepository;
+use JiraAPI\Model\Data\IssueCollection;
 use JiraAPI\Model\Entity\Issue;
 
-class IssueRepositoryTest extends \PHPUnit\Framework\TestCase
+class IssueCollectionTest extends \PHPUnit\Framework\TestCase
 {
     private $issueRepository;
 
@@ -22,7 +22,7 @@ class IssueRepositoryTest extends \PHPUnit\Framework\TestCase
             new Issue(36, 'testissue-7', 'www.outlook.com', 'it was a stray', 'Isaak', 'Closed', 'feature', [])
         ];
 
-        $this->issueRepository = new IssueRepository($issues);
+        $this->issueRepository = new IssueCollection($issues);
     }
 
     /**

@@ -6,28 +6,42 @@ namespace JiraAPI\Model\Data;
 use JiraAPI\Model\Entity\Issue;
 
 /**
- * Class IssueRepository
+ * Class IssueCollection
  * @package JiraAPI
  */
-class IssueRepository
+class IssueCollection
 {
     /**
      * @var Issue[]
      */
     private $issues;
-    /**
-     * @var int
-     */
-    private $totalIssues;
 
     /**
-     * IssueRepository constructor.
+     * IssueCollection constructor.
      * @param array $issues
      */
     public function __construct(array $issues)
     {
         $this->issues = $issues;
-        $this->totalIssues = $this->getTotalIssues();
+    }
+
+    /**
+     * @return array|Issue[]
+     */
+    public function getIssues()
+    {
+        return $this->issues;
+    }
+
+    /**
+     * @param Issue $issue
+     * @return bool
+     */
+    public function add(Issue $issue)
+    {
+        $this->issues[] = $issue;
+
+        return true;
     }
 
     /**
@@ -104,32 +118,11 @@ class IssueRepository
     }
 
     /**
-     * @return int
-     */
-    public function getTotalIssues(): int
-    {
-        $openIssues = $this->getOpenIssues();
-        $inProgressIssues = $this->getInProgressIssues();
-        $toReviewIssues = $this->getToReviewIssues();
-        $doneIssues = $this->getDoneIssues();
-        $closedIssues = $this->getClosedIssues();
-
-        $totalIssues = 0;
-        $totalIssues += count($openIssues);
-        $totalIssues += count($inProgressIssues);
-        $totalIssues += count($toReviewIssues);
-        $totalIssues += count($doneIssues);
-        $totalIssues += count($closedIssues);
-
-        return $totalIssues;
-    }
-
-    /**
      * @return float
      */
     public function getOpenIssuesPercentage(): float
     {
-        return round(((count($this->getOpenIssues()) / $this->totalIssues) * 100), 2);
+        return round(((count($this->getOpenIssues()) / count($this->issues)) * 100), 2);
     }
 
     /**
@@ -137,7 +130,7 @@ class IssueRepository
      */
     public function getInProgressIssuesPercentage(): float
     {
-        return round(((count($this->getInProgressIssues()) / $this->totalIssues) * 100), 2);
+        return round(((count($this->getInProgressIssues()) / count($this->issues)) * 100), 2);
     }
 
     /**
@@ -145,7 +138,7 @@ class IssueRepository
      */
     public function getToReviewIssuesPercentage(): float
     {
-        return round(((count($this->getToReviewIssues()) / $this->totalIssues) * 100), 2);
+        return round(((count($this->getToReviewIssues()) / count($this->issues)) * 100), 2);
     }
 
     /**
@@ -153,7 +146,7 @@ class IssueRepository
      */
     public function getDoneIssuesPercentage(): float
     {
-        return round(((count($this->getDoneIssues()) / $this->totalIssues) * 100), 2);
+        return round(((count($this->getDoneIssues()) / count($this->issues)) * 100), 2);
     }
 
     /**
@@ -161,15 +154,7 @@ class IssueRepository
      */
     public function getClosedIssuesPercentage(): float
     {
-        return round(((count($this->getClosedIssues()) / $this->totalIssues) * 100), 2);
-    }
-
-    /**
-     * @return array|Issue[]
-     */
-    public function getIssues()
-    {
-        return $this->issues;
+        return round(((count($this->getClosedIssues()) / count($this->issues)) * 100), 2);
     }
 
     /**

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace JiraAPI\Infrastructure;
 
-use JiraAPI\Model\Data\IssueRepository;
+use JiraAPI\Model\Entity\Issue;
 use JiraAPI\Model\Entity\Sprint;
 
 /**
@@ -18,7 +18,7 @@ interface BacklogApi
     public function getSprint(): Sprint;
 
     /**
-     * @return IssueRepository
+     * @return Issue[]
      */
-    public function getIssues(): IssueRepository;
+    public function getIssues(): array;
 }
