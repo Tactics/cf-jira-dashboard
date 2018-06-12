@@ -13,6 +13,14 @@ class IssueCollectionMother
     /**
      * @return IssueCollection
      */
+    public static function withoutIssues(): IssueCollection
+    {
+        return new IssueCollection([]);
+    }
+
+    /**
+     * @return IssueCollection
+     */
     public static function withACollectionOfIssues(): IssueCollection
     {
         return new IssueCollection(array_merge(

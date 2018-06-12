@@ -20,7 +20,7 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function can_add_an_issue_to_a_collection()
     {
-        $collection = new IssueCollection([]);
+        $collection = IssueCollectionMother::withoutIssues();
 
         self::assertEmpty($collection->getIssues());
 
@@ -36,51 +36,39 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
     {
         $collection = IssueCollectionMother::withACollectionOfIssues();
 
-        self::assertEquals(IssueMother::openBugs(), $collection->getOpenIssues());
+        /** since our keys are not significant, we can compare to array_values */
+        self::assertEquals(IssueMother::openBugs(), array_values($collection->getOpenIssues()));
+        self::assertEquals(IssueMother::bugsInProgress(), array_values($collection->getInProgressIssues()));
+        self::assertEquals(array_merge(IssueMother::bugsUpForReview(), IssueMother::featuresUpForReview()), array_values($collection->getToReviewIssues()));
+        self::assertEquals(IssueMother::resolvedFeatures(), array_values($collection->getDoneIssues()));
+        self::assertEquals(IssueMother::closedFeatures(), array_values($collection->getClosedIssues()));
     }
 
     /**
      * @test
      */
-    public function get_open_issues_percentage_returns_float_of_opened_and_reopened_issues()
+    public function get_representing_percentage_for_each_status()
     {
-        $result = $this->issueCollection->getOpenIssuesPercentage();
-        $this->assertEquals(14.29, $result);
+        $collection = IssueCollectionMother::withACollectionOfIssues();
+
+        $this->assertEquals(14.29, $collection->getOpenIssuesPercentage());
+        $this->assertEquals(14.29, $collection->getInProgressIssuesPercentage());
+        $this->assertEquals(28.57, $collection->getToReviewIssuesPercentage());
+        $this->assertEquals(28.57, $collection->getDoneIssuesPercentage());
+        $this->assertEquals(14.29, $collection->getClosedIssuesPercentage());
     }
 
     /**
      * @test
      */
-    public function get_in_progress_issues_percentage_returns_float()
+    public function will_return_zero_as_a_percent_when_no_issues_in_collection()
     {
-        $result = $this->issueCollection->getInProgressIssuesPercentage();
-        $this->assertEquals(14.29, $result);
-    }
+        $collection = IssueCollectionMother::withoutIssues();
 
-    /**
-     * @test
-     */
-    public function get_to_review_issues_percentage_returns_float()
-    {
-        $result = $this->issueCollection->getToReviewIssuesPercentage();
-        $this->assertEquals(28.57, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function get_done_issues_percentage_returns_float()
-    {
-        $result = $this->issueCollection->getDoneIssuesPercentage();
-        $this->assertEquals(28.57, $result);
-    }
-
-    /**
-     * @test
-     */
-    public function get_closed_issues_percentage_returns_float()
-    {
-        $result = $this->issueCollection->getClosedIssuesPercentage();
-        $this->assertEquals(14.29, $result);
+        $this->assertEquals(0, $collection->getOpenIssuesPercentage());
+        $this->assertEquals(0, $collection->getInProgressIssuesPercentage());
+        $this->assertEquals(0, $collection->getToReviewIssuesPercentage());
+        $this->assertEquals(0, $collection->getDoneIssuesPercentage());
+        $this->assertEquals(0, $collection->getClosedIssuesPercentage());
     }
 }

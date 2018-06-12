@@ -45,70 +45,60 @@ class IssueCollection
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getOpenIssues(): ?array
+    public function getOpenIssues(): array
     {
-        $openIssues = array_filter($this->issues, function (Issue $var) {
+        return array_filter($this->issues, function (Issue $var) {
             return ($var->getStateName() === Issue::OPEN) || ($var->getStateName() === Issue::REOPENED);
         });
-
-        return $openIssues;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getInProgressIssues(): ?array
+    public function getInProgressIssues(): array
     {
-        $inProgressIssues = array_filter($this->issues, function (Issue $var) {
+        return array_filter($this->issues, function (Issue $var) {
             return ($var->getStateName() === Issue::IN_PROGRESS);
         });
-
-        return $inProgressIssues;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getToReviewIssues(): ?array
+    public function getToReviewIssues(): array
     {
-        $toReviewIssues = array_filter($this->issues, function (Issue $var) {
+        return array_filter($this->issues, function (Issue $var) {
             return ($var->getStateName() === Issue::REVIEW);
         });
-
-        return $toReviewIssues;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getDoneIssues(): ?array
+    public function getDoneIssues(): array
     {
-        $doneIssues = array_filter($this->issues, function (Issue $var) {
+        return array_filter($this->issues, function (Issue $var) {
             return ($var->getStateName() === Issue::RESOLVED);
         });
-
-        return $doneIssues;
     }
 
     /**
-     * @return array|null
+     * @return array
      */
-    public function getClosedIssues(): ?array
+    public function getClosedIssues(): array
     {
-        $closedIssues = array_filter($this->issues, function (Issue $var) {
+        return array_filter($this->issues, function (Issue $var) {
             return ($var->getStateName() === Issue::CLOSED);
         });
-
-        return $closedIssues;
     }
 
     /**
-     * @param int $id
+     * @param string $id
      * @return Issue
      */
-    public function getIssueById(int $id): Issue
+    public function getIssueById(string $id): Issue
     {
         $filtered = array_filter($this->issues, function (Issue $var) use ($id) {
             return ($var->getId() === $id);
@@ -122,7 +112,7 @@ class IssueCollection
      */
     public function getOpenIssuesPercentage(): float
     {
-        return round(((count($this->getOpenIssues()) / count($this->issues)) * 100), 2);
+        return $this->calculatePercentage($this->getOpenIssues());
     }
 
     /**
@@ -130,7 +120,7 @@ class IssueCollection
      */
     public function getInProgressIssuesPercentage(): float
     {
-        return round(((count($this->getInProgressIssues()) / count($this->issues)) * 100), 2);
+        return $this->calculatePercentage($this->getInProgressIssues());
     }
 
     /**
@@ -138,7 +128,7 @@ class IssueCollection
      */
     public function getToReviewIssuesPercentage(): float
     {
-        return round(((count($this->getToReviewIssues()) / count($this->issues)) * 100), 2);
+        return $this->calculatePercentage($this->getToReviewIssues());
     }
 
     /**
@@ -146,7 +136,7 @@ class IssueCollection
      */
     public function getDoneIssuesPercentage(): float
     {
-        return round(((count($this->getDoneIssues()) / count($this->issues)) * 100), 2);
+        return $this->calculatePercentage($this->getDoneIssues());
     }
 
     /**
@@ -154,6 +144,20 @@ class IssueCollection
      */
     public function getClosedIssuesPercentage(): float
     {
-        return round(((count($this->getClosedIssues()) / count($this->issues)) * 100), 2);
+        return $this->calculatePercentage($this->getClosedIssues());
+    }
+
+    /**
+     * @param array $issues
+     * @return float
+     */
+    private function calculatePercentage(array $issues): float
+    {
+        /** fallback for dividing by zero */
+        if (0 === count($this->issues)){
+            return 0;
+        }
+
+        return round(((count($issues) / count($this->issues)) * 100), 2);
     }
 }

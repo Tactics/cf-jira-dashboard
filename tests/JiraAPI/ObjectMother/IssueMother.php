@@ -17,7 +17,7 @@ class IssueMother
     public static function openBugs(): array
     {
         return [
-            new Issue('30', 'testissue-1', 'www.google.com', 'to the moon', 'Stijn', 'open', 'bug', [])
+            new Issue('30', 'testissue-1', 'www.google.com', 'to the moon', 'Stijn', Issue::OPEN, 'bug', [])
         ];
     }
 
@@ -27,8 +27,8 @@ class IssueMother
     public static function resolvedFeatures(): array
     {
         return [
-            new Issue('31', 'CLEARFACTS-2', 'www.gmail.com', 'and beyond', 'Freddy', 'Resolved', 'feature', []),
-            new Issue('32', 'VDL-1', 'www.gmail.be', 'and even further', 'Bart', 'Resolved', 'feature', [])
+            new Issue('31', 'CLEARFACTS-2', 'www.gmail.com', 'and beyond', 'Freddy', Issue::RESOLVED, 'feature', []),
+            new Issue('32', 'VDL-1', 'www.gmail.be', 'and even further', 'Bart', Issue::RESOLVED, 'feature', [])
         ];
     }
 
@@ -38,7 +38,7 @@ class IssueMother
     public static function bugsInProgress(): array
     {
         return [
-            new Issue('33', 'testissue-4', 'www.hotmail.com', 'a long time ago', 'Mathieu', 'In Progress', 'bug', []),
+            new Issue('33', 'testissue-4', 'www.hotmail.com', 'a long time ago', 'Mathieu', Issue::IN_PROGRESS, 'bug', []),
 
         ];
     }
@@ -49,7 +49,7 @@ class IssueMother
     public static function featuresUpForReview(): array
     {
         return [
-            new Issue('34', 'testissue-5', 'www.msn.be', 'in a galaxy far far away', 'Jeroen', 'Review', 'feature', [])
+            new Issue('34', 'testissue-5', 'www.msn.be', 'in a galaxy far far away', 'Jeroen', Issue::REVIEW, 'feature', [])
         ];
     }
 
@@ -59,7 +59,7 @@ class IssueMother
     public static function bugsUpForReview(): array
     {
         return [
-            new Issue('35', 'testissue-6', 'www.yahoo.com', 'lived a piglet', 'Gijs', 'Review', 'Resolved', [])
+            new Issue('35', 'testissue-6', 'www.yahoo.com', 'lived a piglet', 'Gijs', Issue::REVIEW, 'Resolved', [])
         ];
     }
 
@@ -69,7 +69,7 @@ class IssueMother
     public static function closedFeatures(): array
     {
         return [
-            new Issue('36', 'testissue-7', 'www.outlook.com', 'it was a stray', 'Isaak', 'Closed', 'feature', [])
+            new Issue('36', 'testissue-7', 'www.outlook.com', 'it was a stray', 'Isaak', Issue::CLOSED, 'feature', [])
 
         ];
     }
