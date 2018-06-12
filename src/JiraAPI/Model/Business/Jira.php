@@ -44,7 +44,7 @@ class Jira implements BacklogApi
      */
     public function __construct()
     {
-        $config = require __DIR__ . '/../../secrets/secrets.php';
+        $config = require __DIR__ . '/../../../../secrets/secrets.php';
         $this->username = $config['username'];
         $this->password = $config['password'];
         $this->getClearFactsSprint();

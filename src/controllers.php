@@ -3,6 +3,7 @@
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use JiraAPI\Model\Business\Jira;
+use JiraAPI\Controller\Action\DashboardAction;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 $app->get('/', function () use ($app) {
@@ -12,16 +13,10 @@ $app->get('/', function () use ($app) {
 ;
 
 $app->get('/dashboard', function () use ($app) {
+    $dashboard = new DashboardAction();
+    $dashboard->execute();
 
-    $jira = new Jira();
-
-    $sprint = $jira->getSprint();
-    $issues = $jira->getIssues();
-
-    return $app['twig']->render('index.html.twig', array(
-        'sprint' => $sprint,
-        'issues' => $issues,
-    ));
+    return $app['twig']->render('index.html.twig', $dashboard->getResponse());
 });
 
 $app->get('/maildone', function () use ($app) {
