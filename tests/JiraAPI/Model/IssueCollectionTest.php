@@ -11,11 +11,6 @@ use Tests\JiraAPI\ObjectMother\IssueMother;
 class IssueCollectionTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @var IssueCollection
-     */
-    private $issueCollection;
-
-    /**
      * @test
      */
     public function can_add_an_issue_to_a_collection()
@@ -70,5 +65,16 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals(0, $collection->getToReviewIssuesPercentage());
         $this->assertEquals(0, $collection->getDoneIssuesPercentage());
         $this->assertEquals(0, $collection->getClosedIssuesPercentage());
+    }
+
+    /**
+     * @test
+     */
+    public function can_fetch_an_issue_by_its_id()
+    {
+        $collection = IssueCollectionMother::withACollectionOfIssues();
+
+        $this->assertEquals(IssueMother::openBugs()[0], $collection->getIssueById('30'));
+        $this->assertEquals(null, $collection->getIssueById('Not an Id'));
     }
 }

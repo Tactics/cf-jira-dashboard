@@ -70,7 +70,6 @@ class IssueMother
     {
         return [
             new Issue('36', 'testissue-7', 'www.outlook.com', 'it was a stray', 'Isaak', Issue::CLOSED, 'feature', [])
-
         ];
     }
 }

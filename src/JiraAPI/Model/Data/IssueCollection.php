@@ -96,15 +96,15 @@ class IssueCollection
 
     /**
      * @param string $id
-     * @return Issue
+     * @return Issue|null
      */
-    public function getIssueById(string $id): Issue
+    public function getIssueById(string $id): ?Issue
     {
         $filtered = array_filter($this->issues, function (Issue $var) use ($id) {
             return ($var->getId() === $id);
         });
 
-        return reset($filtered);
+        return reset($filtered) ?: null;
     }
 
     /**
