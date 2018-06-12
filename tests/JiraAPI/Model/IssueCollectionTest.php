@@ -1,47 +1,42 @@
 <?php
 declare(strict_types=1);
 
-namespace tests\JiraAPI\Model;
+namespace Tests\JiraAPI\Model;
 
 use JiraAPI\Model\Data\IssueCollection;
 use JiraAPI\Model\Entity\Issue;
+use Tests\JiraAPI\ObjectMother\IssueCollectionMother;
+use Tests\JiraAPI\ObjectMother\IssueMother;
 
 class IssueCollectionTest extends \PHPUnit\Framework\TestCase
 {
-    private $issueRepository;
+    /**
+     * @var IssueCollection
+     */
+    private $issueCollection;
 
-    public function setUp()
+    /**
+     * @test
+     */
+    public function can_add_an_issue_to_a_collection()
     {
-        $issues = [
-            new Issue(30, 'testissue-1', 'www.google.com', 'to the moon', 'Stijn', 'open', 'bug', []),
-            new Issue(31, 'testissue-2', 'www.gmail.com', 'and beyond', 'Freddy', 'Resolved', 'feature', []),
-            new Issue(32, 'testissue-3', 'www.gmail.be', 'and even further', 'Bart', 'Resolved', 'feature', []),
-            new Issue(33, 'testissue-4', 'www.hotmail.com', 'a long time ago', 'Mathieu', 'In Progress', 'bug', []),
-            new Issue(34, 'testissue-5', 'www.msn.be', 'in a galaxy far far away', 'Jeroen', 'Review', 'feature', []),
-            new Issue(35, 'testissue-6', 'www.yahoo.com', 'lived a piglet', 'Gijs', 'Review', 'Resolved', []),
-            new Issue(36, 'testissue-7', 'www.outlook.com', 'it was a stray', 'Isaak', 'Closed', 'feature', [])
-        ];
+        $collection = new IssueCollection([]);
 
-        $this->issueRepository = new IssueCollection($issues);
+        self::assertEmpty($collection->getIssues());
+
+        $collection->add(new Issue('123', 'CLEARFACTS-X', 'jira.com/CLEARFACTS-X', 'addable issues', 'Isaak', 'To review', 'feature', []));
+
+        self::assertCount(1, $collection->getIssues());
     }
 
     /**
      * @test
      */
-    public function get_total_issues_counts_all_possible_states()
+    public function can_fetch_all_issues_per_status()
     {
-        $result = $this->issueRepository->getTotalIssues();
-        $this->assertEquals(7, $result);
-    }
+        $collection = IssueCollectionMother::withACollectionOfIssues();
 
-    /**
-     * @test
-     */
-    public function get_done_issues_link_returns_array_of_done_links()
-    {
-        $result = $this->issueRepository->getDoneIssueLinks();
-        $this->assertEquals('www.gmail.com', $result[0]);
-        $this->assertEquals('www.gmail.be', $result[1]);
+        self::assertEquals(IssueMother::openBugs(), $collection->getOpenIssues());
     }
 
     /**
@@ -49,7 +44,7 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function get_open_issues_percentage_returns_float_of_opened_and_reopened_issues()
     {
-        $result = $this->issueRepository->getOpenIssuesPercentage();
+        $result = $this->issueCollection->getOpenIssuesPercentage();
         $this->assertEquals(14.29, $result);
     }
 
@@ -58,7 +53,7 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function get_in_progress_issues_percentage_returns_float()
     {
-        $result = $this->issueRepository->getInProgressIssuesPercentage();
+        $result = $this->issueCollection->getInProgressIssuesPercentage();
         $this->assertEquals(14.29, $result);
     }
 
@@ -67,7 +62,7 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function get_to_review_issues_percentage_returns_float()
     {
-        $result = $this->issueRepository->getToReviewIssuesPercentage();
+        $result = $this->issueCollection->getToReviewIssuesPercentage();
         $this->assertEquals(28.57, $result);
     }
 
@@ -76,7 +71,7 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function get_done_issues_percentage_returns_float()
     {
-        $result = $this->issueRepository->getDoneIssuesPercentage();
+        $result = $this->issueCollection->getDoneIssuesPercentage();
         $this->assertEquals(28.57, $result);
     }
 
@@ -85,7 +80,7 @@ class IssueCollectionTest extends \PHPUnit\Framework\TestCase
      */
     public function get_closed_issues_percentage_returns_float()
     {
-        $result = $this->issueRepository->getClosedIssuesPercentage();
+        $result = $this->issueCollection->getClosedIssuesPercentage();
         $this->assertEquals(14.29, $result);
     }
 }

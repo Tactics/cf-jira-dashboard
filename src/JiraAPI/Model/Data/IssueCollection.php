@@ -156,19 +156,4 @@ class IssueCollection
     {
         return round(((count($this->getClosedIssues()) / count($this->issues)) * 100), 2);
     }
-
-    /**
-     * @return array
-     */
-    public function getDoneIssueLinks()
-    {
-        $doneIssues = $this->getDoneIssues();
-        $links = [];
-        foreach ($doneIssues as $issue) {
-            array_push($links, $issue->getLink());
-        }
-
-        return $links;
-    }
-
 }

@@ -84,7 +84,6 @@ class MapperTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('SPRINT 16-4', $sprint->getName());
         $this->assertEquals('the moon', $sprint->getGoal());
         $this->assertEquals('485', $sprint->getId());
-
     }
 
     /**

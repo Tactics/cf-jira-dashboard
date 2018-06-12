@@ -28,7 +28,7 @@
 
     },
     "autoload": {
-        "psr-0": { "": "src/", "/tests": "/tests" }
+        "psr-0": { "": "src/", "Tests\\": "tests/"}
     },
     "extra": {
         "branch-alias": {

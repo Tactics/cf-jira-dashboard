@@ -21,7 +21,7 @@ $app->get('/dashboard', function () use ($app) {
         return $app['twig']->render('errors/500.html.twig');
     }
 
-    return $app['twig']->render('index.html.twig', $dashboard->getResponse());
+    return $app['twig']->render('index2.html.twig', $dashboard->getResponse());
 });
 
 $app->get('/maildone', function () use ($app) {
