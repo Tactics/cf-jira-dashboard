@@ -2,9 +2,12 @@
 
 {% block content %}
     <div id="container">
+
+    <div class="jumbotron">
+        <h1><i class="fas fa-align-right"></i>Jira Dashboard<i class="fas fa-align-left"></i></h1>
+    </div>
     <div class="row">
         <div id="title">
-            <h2>Jira Dashboard</h2>
         </div>
     </div>
     <div class="row">
@@ -103,7 +106,7 @@
                 <a href="{{ issue.link }}" class="issue-name" target="_blank">{{ issue.key }}</a>
                 <br>
                 <div class="issue-type">{{ issue.type }}</div>
-                <div class="issue-status">{{ issue.stateName }}</div>
+                <div class="issue-status">{{ issue.status }}</div>
                 <div class="customDone">{{ issue.customfieldsDoneChecked }}</div>
                 <div>{{ issue.assignee }}</div>
                 <br>

@@ -2,12 +2,9 @@
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use JiraAPI\Mapper;
-use JiraAPI\IssueRepository;
-use JiraAPI\Jira;
+use JiraAPI\Model\Business\Jira;
+use JiraAPI\Exception\JiraException;
+use JiraAPI\Controller\Action\DashboardAction;
 
 //Request::setTrustedProxies(array('127.0.0.1'));
 $app->get('/', function () use ($app) {
@@ -17,18 +14,14 @@ $app->get('/', function () use ($app) {
 ;
 
 $app->get('/dashboard', function () use ($app) {
+    $dashboard = new DashboardAction();
+    try {
+    $dashboard->execute();
+    } catch (JiraException $e) {
+        return $app['twig']->render('errors/500.html.twig');
+    }
 
-    $jira = new Jira();
-
-    /** @var \JiraAPI\Sprint $sprint */
-    $sprint = $jira->getSprint();
-    /** @var IssueRepository $issues */
-    $issues = $jira->getIssues();
-
-    return $app['twig']->render('index.html.twig', array(
-        'sprint' => $sprint,
-        'issues' => $issues,
-    ));
+    return $app['twig']->render('index2.html.twig', $dashboard->getResponse());
 });
 
 $app->get('/maildone', function () use ($app) {
