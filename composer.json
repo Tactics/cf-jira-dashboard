@@ -3,6 +3,9 @@
     "description": "A pre-configured skeleton for the Silex microframework",
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {"type": "vcs", "url":"git@github.com:Clearfacts/Datalog.git"}
+    ],
     "require": {
         "php": ">=7.1",
         "silex/silex": "~2.0",
@@ -24,7 +27,8 @@
         "symfony/validator": "~2.8|^3.0",
         "guzzlehttp/guzzle": "^6.3",
         "twbs/bootstrap": "^4.1",
-        "swiftmailer/swiftmailer": "^6.0"
+        "swiftmailer/swiftmailer": "^6.0",
+        "clearfacts/datalog": "^2.0"
 
     },
     "autoload": {
